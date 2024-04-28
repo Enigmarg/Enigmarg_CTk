@@ -76,3 +76,6 @@ class Window():
     def create_main_screen(self):
         self.create_login_widgets()
         self.screen.mainloop()
+
+if __name__ == "__main__":
+    Window().create_main_screen()
