@@ -72,3 +72,7 @@ class Window():
         self.create_password_input()
         self.create_button("Registrar")
         self.create_login_link()
+
+    def create_main_screen(self):
+        self.create_login_widgets()
+        self.screen.mainloop()
