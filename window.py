@@ -33,8 +33,8 @@ class Window():
         self.password_input = customtkinter.CTkEntry(self.screen, width=200, height=30, placeholder_text="Senha", show="*")
         self.password_input.place(x=WIDTH/2, y=HEIGHT/2, anchor="center")
 
-    def create_button(self, text):
-        login_button = customtkinter.CTkButton(self.screen, width=200, height=30, text=text, fg_color=blue_link_color, hover_color=blue_link_hover_color)
+    def create_button(self, text, command):
+        login_button = customtkinter.CTkButton(self.screen, width=200, height=30, text=text, fg_color=blue_link_color, hover_color=blue_link_hover_color, command=command)
         login_button.place(x=WIDTH/2, y=HEIGHT/2 + 40, anchor="center")
 
     def create_login_link(self):
@@ -44,6 +44,10 @@ class Window():
         login_link_button = customtkinter.CTkButton(self.screen, width=0, height=0, text="Clique aqui", command=self.create_login_widgets, text_color=blue_link_color, fg_color="transparent", hover=False, cursor="hand2")
         login_link_button.place(x=WIDTH/2 + 50, y=HEIGHT/2 + 80, anchor="center")
 
+    def clear_window(self):
+        for widget in self.screen.winfo_children():
+            widget.destroy()
+
     def get_email(self):
         email = self.email_input.get()
         return email
@@ -51,10 +55,12 @@ class Window():
     def get_password(self):
         password = self.password_input.get()
         return sha256(password.encode("utf-8")).hexdigest()
-
-    def clear_window(self):
-        for widget in self.screen.winfo_children():
-            widget.destroy()
+    
+    def check_user(self):
+        if self.get_password() == database.get_password_from_database(self.get_email()):
+            print("Login feito com sucesso!")
+        else:
+            print("Email ou senha incorretos!")
 
     def create_login_widgets(self):
         self.clear_window()
@@ -62,7 +68,7 @@ class Window():
 
         self.create_email_input()
         self.create_password_input()
-        self.create_button("Login")
+        self.create_button("Login", self.check_user)
         self.create_login_link()
         self.screen.mainloop()
 
