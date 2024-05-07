@@ -23,7 +23,7 @@ class Database():
             print(f"Falha na conexão! {err}")
             return None
         
-    def add_user_to_database(self, email, password):
-        sql = "INSERT INTO tb_user(user_email, user_password, role_id) VALUES (%s, %s, 1)" # O role_id 1 é apenas para testes, pois ainda não temos uma janela com a opção de seleção de cargos.
-        self.cursor.execute(sql, (email, password))
+    def add_user_to_database(self, email, password, role_id):
+        sql = "INSERT INTO tb_user(user_email, user_password, role_id) VALUES (%s, %s, %d)" # Ainda é necessário a implementação de uma janela com a opção de seleção de cargos.
+        self.cursor.execute(sql, (email, password, role_id))
         self.cnx.commit()
