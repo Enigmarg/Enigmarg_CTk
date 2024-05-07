@@ -29,8 +29,11 @@ class Database():
         self.cnx.commit()
 
     def get_password_from_database(self, email):
-        sql = ("SELECT user_password FROM tb_user WHERE user_email='%s'" % email)
-        self.cursor.execute(sql)
-        self.cnx.commit()
-        password = self.cursor.fetchone()[0]
-        return password
+        try:
+            sql = ("SELECT user_password FROM tb_user WHERE user_email='%s'" % email)
+            self.cursor.execute(sql)
+            self.cnx.commit()
+            password = self.cursor.fetchone()[0]
+            return password
+        except Exception as e:
+            print(e)

@@ -1,4 +1,5 @@
 import customtkinter
+from tkinter import messagebox
 from database import Database
 from hashlib import sha256
 
@@ -59,8 +60,10 @@ class Window():
     def check_user(self):
         if self.get_password() == database.get_password_from_database(self.get_email()):
             print("Login feito com sucesso!")
+            self.screen.destroy()
         else:
             print("Email ou senha incorretos!")
+            messagebox.showerror("Erro", "Email ou senha incorretos")
 
     def create_login_widgets(self):
         self.clear_window()
