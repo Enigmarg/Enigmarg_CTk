@@ -1,4 +1,8 @@
 import customtkinter
+from database import Database
+
+database = Database()
+database.connect()
 
 WIDTH = 380
 HEIGHT = 450
