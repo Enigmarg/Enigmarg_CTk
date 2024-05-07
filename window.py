@@ -1,5 +1,6 @@
 import customtkinter
 from database import Database
+from hashlib import sha256
 
 database = Database()
 database.connect()
@@ -42,6 +43,10 @@ class Window():
          
         login_link_button = customtkinter.CTkButton(self.screen, width=0, height=0, text="Clique aqui", command=self.create_login_widgets, text_color=blue_link_color, fg_color="transparent", hover=False, cursor="hand2")
         login_link_button.place(x=WIDTH/2 + 50, y=HEIGHT/2 + 80, anchor="center")
+
+    def get_password(self):
+        password = self.password_input.get()
+        return sha256(password.encode("utf-8")).hexdigest()
 
     def clear_window(self):
         for widget in self.screen.winfo_children():
