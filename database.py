@@ -1,5 +1,9 @@
-import mysql.connector
+from dotenv import load_dotenv
 import os
+import mysql.connector
+from mysql.connector.constants import ClientFlag
+
+load_dotenv()
 
 class Database():
     def __init__(self):
@@ -7,14 +11,20 @@ class Database():
         self.user = os.getenv("USER")
         self.password = os.getenv("PASSWORD")
         self.database = os.getenv("DATABASE")
+        self.port = os.getenv("PORT")
 
     def connect(self):
         try:
             self.cnx = mysql.connector.connect(
-                host = self.host,
                 user = self.user,
                 password = self.password,
-                database = self.database
+                host = self.host,
+                database = self.database,
+                port = self.port,
+                client_flags = [ClientFlag.SSL],
+                # "ssl_ca": "/opt/mysql/ssl/ca.pem",
+                # "ssl_cert": "/opt/mysql/ssl/client-cert.pem",
+                # "ssl_key": "/opt/mysql/ssl/client-key.pem",
             )
             print("Conexão bem sucedida!")
             self.cursor = self.cnx.cursor(buffered=True)
