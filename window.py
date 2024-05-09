@@ -28,7 +28,7 @@ class Window():
 
     def create_email_input(self, x=0, y=0):
         self.email_input = customtkinter.CTkEntry(self.screen, width=200, height=30, placeholder_text="E-mail")
-        self.email_input.place(x=WIDTH/2 + x, y=HEIGHT/2 + y, anchor="center")
+        self.email_input.place(x=x, y=y, anchor="center")
 
     def create_password_input(self):
         self.password_input = customtkinter.CTkEntry(self.screen, width=200, height=30, placeholder_text="Senha", show="*")
@@ -66,7 +66,7 @@ class Window():
         self.clear_window()
         self.screen.title("Login")
 
-        self.create_email_input(y=-40)
+        self.create_email_input(x=WIDTH/2, y=HEIGHT/2-40)
         self.create_password_input()
         self.create_button("Login", self.check_user)
         self.link_forgot_password(None)
