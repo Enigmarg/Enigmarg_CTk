@@ -38,12 +38,9 @@ class Window():
         login_button = customtkinter.CTkButton(self.screen, width=200, height=30, text=text, fg_color=blue_link_color, hover_color=blue_link_hover_color, command=command)
         login_button.place(x=WIDTH/2, y=HEIGHT/2 + 40, anchor="center")
 
-    def create_login_link(self):
-        login_link_label = customtkinter.CTkLabel(self.screen, text="Esqueceu a senha?")
-        login_link_label.place(x=WIDTH/2 - 40, y=HEIGHT/2 + 80, anchor="center")
-         
-        login_link_button = customtkinter.CTkButton(self.screen, width=0, height=0, text="Clique aqui", command=self.create_login_widgets, text_color=blue_link_color, fg_color="transparent", hover=False, cursor="hand2")
-        login_link_button.place(x=WIDTH/2 + 50, y=HEIGHT/2 + 80, anchor="center")
+    def link_forgot_password(self, command):
+        login_link_button = customtkinter.CTkButton(self.screen, width=0, height=0, text="Esqueceu a senha?", command=command, text_color=blue_link_color, fg_color="transparent", hover=False, cursor="hand2")
+        login_link_button.place(x=WIDTH/2, y=HEIGHT/2 + 80, anchor="center")
 
     def clear_window(self):
         for widget in self.screen.winfo_children():
@@ -72,7 +69,7 @@ class Window():
         self.create_email_input()
         self.create_password_input()
         self.create_button("Login", self.check_user)
-        self.create_login_link()
+        self.link_forgot_password(None)
         self.screen.mainloop()
 
 if __name__ == "__main__":
