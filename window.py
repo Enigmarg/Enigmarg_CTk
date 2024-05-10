@@ -43,8 +43,8 @@ class Window():
         login_button = customtkinter.CTkButton(self.screen, width=200, height=30, text="Login", fg_color=blue_link_color, hover_color=blue_link_hover_color, command=None)
         login_button.place(x=WIDTH/2, y=HEIGHT/2 + 40, anchor="center")
 
-        login_link_button = customtkinter.CTkButton(self.screen, width=0, height=0, text="Esqueceu a senha?", command=self.create_forgot_password_screen, text_color=blue_link_color, fg_color="transparent", hover=False, cursor="hand2")
-        login_link_button.place(x=WIDTH/2, y=HEIGHT/2 + 80, anchor="center")
+        link_forgot_password = customtkinter.CTkButton(self.screen, width=0, height=0, text="Esqueceu a senha?", command=self.create_forgot_password_screen, text_color=blue_link_color, fg_color="transparent", hover=False, cursor="hand2")
+        link_forgot_password.place(x=WIDTH/2, y=HEIGHT/2 + 80, anchor="center")
 
         self.screen.mainloop()
 
@@ -55,11 +55,11 @@ class Window():
         self.email_input = customtkinter.CTkEntry(self.screen, width=200, height=30, placeholder_text="E-mail")
         self.email_input.place(x = WIDTH/2, y = HEIGHT/2-20, anchor="center")
 
-        login_button = customtkinter.CTkButton(self.screen, width=200, height=30, text="Enviar", fg_color=blue_link_color, hover_color=blue_link_hover_color, command=None)
-        login_button.place(x=WIDTH/2, y=HEIGHT/2 + 20, anchor="center")
+        send_button = customtkinter.CTkButton(self.screen, width=200, height=30, text="Enviar", fg_color=blue_link_color, hover_color=blue_link_hover_color, command=None)
+        send_button.place(x=WIDTH/2, y=HEIGHT/2 + 20, anchor="center")
 
-        login_link_button = customtkinter.CTkButton(self.screen, width=0, height=0, text="Voltar", command=self.create_login_screen, text_color=blue_link_color, fg_color="transparent", hover=False, cursor="hand2")
-        login_link_button.place(x=WIDTH/2, y=HEIGHT/2 + 60, anchor="center")
+        link_return = customtkinter.CTkButton(self.screen, width=0, height=0, text="Voltar", command=self.create_login_screen, text_color=blue_link_color, fg_color="transparent", hover=False, cursor="hand2")
+        link_return.place(x=WIDTH/2, y=HEIGHT/2 + 60, anchor="center")
 
         self.screen.mainloop()
 
