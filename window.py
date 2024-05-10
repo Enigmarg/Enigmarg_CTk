@@ -105,38 +105,38 @@ class Manager():
     def create_manager_user_screen(self):
         Window.clear_screen(self)
 
-        self.options_frame = customtkinter.CTkFrame(self.screen, width=200, height=600, fg_color=LIGHT_GRAY)
-        self.options_frame.pack(side=customtkinter.LEFT)
-        self.options_frame.pack_propagate(False)
+        options_frame = customtkinter.CTkFrame(self.screen, width=800, height=40, fg_color=LIGHT_GRAY)
+        options_frame.pack(side=customtkinter.TOP)
+        options_frame.pack_propagate(False)
 
-        self.main_frame = customtkinter.CTkFrame(self.screen, width=self.width, height=self.height, fg_color=DARK_GRAY)
-        self.main_frame.pack()
-        self.main_frame.pack_propagate(False)
-
-        users_btn = customtkinter.CTkButton(self.options_frame, width=200, height=60, text="Usuários", font=('Bold', 15), fg_color=DARK_GRAY, hover=False, cursor="hand2")
-        users_btn.place(x=100, y=30, anchor="center")
+        users_btn = customtkinter.CTkButton(options_frame, width=150, height=40, text="Usuários", font=("Bold", 15), fg_color=DARK_GRAY, hover=False, cursor="hand2")
+        users_btn.place(x=75, y=20, anchor="center")
         
-        questions_btn = customtkinter.CTkButton(self.options_frame, width=200, height=60, text="Questões", font=('Bold', 15), command=lambda: self.create_manager_question_screen(), fg_color="transparent", hover=False, cursor="hand2")
-        questions_btn.place(x=100, y=90, anchor="center") 
+        questions_btn = customtkinter.CTkButton(options_frame, width=150, height=40, text="Questões", font=("Bold", 15), command=lambda: self.create_manager_question_screen(), fg_color="transparent", hover=False, cursor="hand2")
+        questions_btn.place(x=225, y=20, anchor="center") 
+
+        main_frame = customtkinter.CTkFrame(self.screen, width=self.width, height=self.height, fg_color=DARK_GRAY)
+        main_frame.pack()
+        main_frame.pack_propagate(False)
 
         self.screen.mainloop()
 
     def create_manager_question_screen(self):
         Window.clear_screen(self)
 
-        self.options_frame = customtkinter.CTkFrame(self.screen, width=200, height=600, fg_color=LIGHT_GRAY)
-        self.options_frame.pack(side=customtkinter.LEFT)
-        self.options_frame.pack_propagate(False)
+        options_frame = customtkinter.CTkFrame(self.screen, width=800, height=40, fg_color=LIGHT_GRAY)
+        options_frame.pack(side=customtkinter.TOP)
+        options_frame.pack_propagate(False)
 
-        self.main_frame = customtkinter.CTkFrame(self.screen, width=self.width, height=self.height, fg_color=DARK_GRAY)
-        self.main_frame.pack()
-        self.main_frame.pack_propagate(False)
+        users_btn = customtkinter.CTkButton(options_frame, text="Usuários", width=150, height=40, font=("Bold", 15), command=lambda: self.create_manager_user_screen(), fg_color="transparent", hover=False, cursor="hand2")
+        users_btn.place(x=75, y=20, anchor="center")
 
-        users_btn = customtkinter.CTkButton(self.options_frame, text="Usuários", width=200, height=60, font=('Bold', 15), command=lambda: self.create_manager_user_screen(), fg_color="transparent", hover=False, cursor="hand2")
-        users_btn.place(x=100, y=30, anchor="center")
+        main_frame = customtkinter.CTkFrame(self.screen, width=self.width, height=self.height, fg_color=DARK_GRAY)
+        main_frame.pack()
+        main_frame.pack_propagate(False)
         
-        questions_btn = customtkinter.CTkButton(self.options_frame, text="Questões", width=200, height=60, font=('Bold', 15), fg_color=DARK_GRAY, hover=False, cursor="hand2")
-        questions_btn.place(x=100, y=90, anchor="center") 
+        questions_btn = customtkinter.CTkButton(options_frame, text="Questões", width=150, height=40, font=("Bold", 15), fg_color=DARK_GRAY, hover=False, cursor="hand2")
+        questions_btn.place(x=225, y=20, anchor="center") 
 
         self.screen.mainloop()
 
