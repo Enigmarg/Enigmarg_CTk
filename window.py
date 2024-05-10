@@ -37,16 +37,16 @@ class Login():
         self.screen.title("Login")
 
         self.email_input = customtkinter.CTkEntry(self.screen, width=200, height=30, placeholder_text="E-mail")
-        self.email_input.place(x = self.width/2, y = self.height/2-40, anchor="center")
+        self.email_input.place(x=self.width/2, y=self.height/2 - 40, anchor="center")
 
         self.password_input = customtkinter.CTkEntry(self.screen, width=200, height=30, placeholder_text="Senha", show="*")
-        self.password_input.place(x = self.width/2, y = self.height/2, anchor="center")
+        self.password_input.place(x=self.width/2, y=self.height/2, anchor="center")
 
         login_btn = customtkinter.CTkButton(self.screen, width=200, height=30, text="Entrar", fg_color=LIGHT_BLUE, hover_color=DARK_BLUE, command=lambda: self.check_user())
-        login_btn.place(x = self.width/2, y = self.height/2 + 40, anchor="center")
+        login_btn.place(x=self.width/2, y=self.height/2 + 40, anchor="center")
 
         forgot_password_btn = customtkinter.CTkButton(self.screen, width=0, height=0, text="Esqueceu a senha?", command=lambda: self.create_forgot_password_screen(), text_color=LIGHT_BLUE, fg_color="transparent", hover=False, cursor="hand2")
-        forgot_password_btn.place(x = self.width/2, y = self.height/2 + 80, anchor="center")
+        forgot_password_btn.place(x=self.width/2, y=self.height/2 + 80, anchor="center")
 
         self.screen.mainloop()
 
@@ -55,13 +55,13 @@ class Login():
         self.screen.title("Login")
 
         self.email_input = customtkinter.CTkEntry(self.screen, width=200, height=30, placeholder_text="E-mail")
-        self.email_input.place(x = self.width/2, y = self.height/2-20, anchor="center")
+        self.email_input.place(x=self.width/2, y=self.height/2 - 20, anchor="center")
 
         send_btn = customtkinter.CTkButton(self.screen, width=200, height=30, text="Enviar", fg_color=LIGHT_BLUE, hover_color=DARK_BLUE, command=None)
-        send_btn.place(x = self.width/2, y = self.height/2 + 20, anchor="center")
+        send_btn.place(x=self.width/2, y=self.height/2 + 20, anchor="center")
 
         return_btn = customtkinter.CTkButton(self.screen, width=0, height=0, text="Voltar", command=lambda: self.create_login_screen(), text_color=LIGHT_BLUE, fg_color="transparent", hover=False, cursor="hand2")
-        return_btn.place(x = self.width/2, y = self.height/2 + 60, anchor="center")
+        return_btn.place(x=self.width/2, y=self.height/2 + 60, anchor="center")
 
         self.screen.mainloop()
 
@@ -98,16 +98,24 @@ class Manager():
 
         self.screen.geometry("%dx%d+%d+%d" % (self.width, self.height, x, y))
 
-    def create_manager_user_screen(self):
-        options_frame = customtkinter.CTkFrame(self.screen, width=200, height=600, fg_color=LIGHT_GRAY)
-        options_frame.pack(side=customtkinter.LEFT)
-        options_frame.pack_propagate(False)
+        self.main_frame = customtkinter.CTkFrame(self.screen, width=self.width, height=self.height, fg_color=DARK_GRAY)
+        self.main_frame.pack()
+        self.main_frame.pack_propagate(False)
 
-        main_frame = customtkinter.CTkFrame(self.screen, width=800, height=600, fg_color=DARK_GRAY)
-        main_frame.pack()
-        main_frame.pack_propagate(False)
+        self.options_frame = customtkinter.CTkFrame(self.screen, width=200, height=600, fg_color=LIGHT_GRAY)
+        self.options_frame.pack(side=customtkinter.LEFT)
+        self.options_frame.pack_propagate(False)
+
+    def create_manager_user_screen(self):
+
+        users_btn = customtkinter.CTkButton(self.options_frame, text="Usuários", width=200, height=60, font=('Bold', 15), fg_color=DARK_GRAY, hover=False, cursor="hand2")
+        users_btn.place(x=100, y=30, anchor="center")
+        
+        questions_btn = customtkinter.CTkButton(self.options_frame, text="Questões", width=200, height=60, font=('Bold', 15), fg_color="transparent", hover=False, cursor="hand2")
+        questions_btn.place(x=100, y=90, anchor="center")
 
         self.screen.mainloop()
 
 if __name__ == "__main__":
-    Login().create_login_screen()
+    # Login().create_login_screen()
+    Manager().create_manager_user_screen()
