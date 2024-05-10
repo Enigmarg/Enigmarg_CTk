@@ -40,7 +40,7 @@ class Window():
         self.password_input = customtkinter.CTkEntry(self.screen, width=200, height=30, placeholder_text="Senha", show="*")
         self.password_input.place(x=WIDTH/2, y=HEIGHT/2, anchor="center")
 
-        login_button = customtkinter.CTkButton(self.screen, width=200, height=30, text="Login", fg_color=blue_link_color, hover_color=blue_link_hover_color, command=None)
+        login_button = customtkinter.CTkButton(self.screen, width=200, height=30, text="Login", fg_color=blue_link_color, hover_color=blue_link_hover_color, command=self.check_user)
         login_button.place(x=WIDTH/2, y=HEIGHT/2 + 40, anchor="center")
 
         link_forgot_password = customtkinter.CTkButton(self.screen, width=0, height=0, text="Esqueceu a senha?", command=self.create_forgot_password_screen, text_color=blue_link_color, fg_color="transparent", hover=False, cursor="hand2")
