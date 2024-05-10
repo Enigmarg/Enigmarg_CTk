@@ -11,6 +11,12 @@ DARK_BLUE = "#0059B3"
 LIGHT_GRAY = "#2A2A2A"
 DARK_GRAY = "#212121"
 
+class Window():
+
+    def clear_screen(window):
+        for widget in window.screen.winfo_children():
+            widget.destroy()
+
 class Login():
 
     def __init__(self):
@@ -28,12 +34,8 @@ class Login():
 
         self.screen.geometry("%dx%d+%d+%d" % (self.width, self.height, x, y))
 
-    def clear_window(self):
-        for widget in self.screen.winfo_children():
-            widget.destroy()
-
     def create_login_screen(self):
-        self.clear_window()
+        Window.clear_screen(self)
         self.screen.title("Login")
 
         self.email_input = customtkinter.CTkEntry(self.screen, width=200, height=30, placeholder_text="E-mail")
@@ -51,7 +53,7 @@ class Login():
         self.screen.mainloop()
 
     def create_forgot_password_screen(self):
-        self.clear_window()
+        Window.clear_screen(self)
         self.screen.title("Login")
 
         self.email_input = customtkinter.CTkEntry(self.screen, width=200, height=30, placeholder_text="E-mail")
@@ -107,15 +109,15 @@ class Manager():
         self.options_frame.pack_propagate(False)
 
     def create_manager_user_screen(self):
+        Window.clear_screen(self)
 
         users_btn = customtkinter.CTkButton(self.options_frame, text="Usuários", width=200, height=60, font=('Bold', 15), fg_color=DARK_GRAY, hover=False, cursor="hand2")
         users_btn.place(x=100, y=30, anchor="center")
         
         questions_btn = customtkinter.CTkButton(self.options_frame, text="Questões", width=200, height=60, font=('Bold', 15), fg_color="transparent", hover=False, cursor="hand2")
-        questions_btn.place(x=100, y=90, anchor="center")
+        questions_btn.place(x=100, y=90, anchor="center") 
 
         self.screen.mainloop()
 
 if __name__ == "__main__":
-    # Login().create_login_screen()
-    Manager().create_manager_user_screen()
+    Login().create_login_screen()
