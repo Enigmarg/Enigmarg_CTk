@@ -40,10 +40,10 @@ class Login():
         self.password_input = customtkinter.CTkEntry(self.screen, width=200, height=30, placeholder_text="Senha", show="*")
         self.password_input.place(x = self.width/2, y = self.height/2, anchor="center")
 
-        login_button = customtkinter.CTkButton(self.screen, width=200, height=30, text="Login", fg_color=LIGHT_BLUE, hover_color=DARK_BLUE, command=self.check_user)
+        login_button = customtkinter.CTkButton(self.screen, width=200, height=30, text="Login", fg_color=LIGHT_BLUE, hover_color=DARK_BLUE, command=lambda: self.check_user())
         login_button.place(x = self.width/2, y = self.height/2 + 40, anchor="center")
 
-        link_forgot_password = customtkinter.CTkButton(self.screen, width=0, height=0, text="Esqueceu a senha?", command=self.create_forgot_password_screen, text_color=LIGHT_BLUE, fg_color="transparent", hover=False, cursor="hand2")
+        link_forgot_password = customtkinter.CTkButton(self.screen, width=0, height=0, text="Esqueceu a senha?", command=lambda: self.create_forgot_password_screen(), text_color=LIGHT_BLUE, fg_color="transparent", hover=False, cursor="hand2")
         link_forgot_password.place(x = self.width/2, y = self.height/2 + 80, anchor="center")
 
         self.screen.mainloop()
@@ -58,7 +58,7 @@ class Login():
         send_button = customtkinter.CTkButton(self.screen, width=200, height=30, text="Enviar", fg_color=LIGHT_BLUE, hover_color=DARK_BLUE, command=None)
         send_button.place(x = self.width/2, y = self.height/2 + 20, anchor="center")
 
-        link_return = customtkinter.CTkButton(self.screen, width=0, height=0, text="Voltar", command=self.create_login_screen, text_color=LIGHT_BLUE, fg_color="transparent", hover=False, cursor="hand2")
+        link_return = customtkinter.CTkButton(self.screen, width=0, height=0, text="Voltar", command=lambda: self.create_login_screen(), text_color=LIGHT_BLUE, fg_color="transparent", hover=False, cursor="hand2")
         link_return.place(x = self.width/2, y = self.height/2 + 60, anchor="center")
 
         self.screen.mainloop()
