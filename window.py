@@ -8,6 +8,8 @@ database.connect()
 
 LIGHT_BLUE = "#0066CC"
 DARK_BLUE = "#0059B3"
+LIGHT_GRAY = "#2A2A2A"
+DARK_GRAY = "#212121"
 
 class Login():
 
@@ -40,7 +42,7 @@ class Login():
         self.password_input = customtkinter.CTkEntry(self.screen, width=200, height=30, placeholder_text="Senha", show="*")
         self.password_input.place(x = self.width/2, y = self.height/2, anchor="center")
 
-        login_button = customtkinter.CTkButton(self.screen, width=200, height=30, text="Login", fg_color=LIGHT_BLUE, hover_color=DARK_BLUE, command=lambda: self.check_user())
+        login_button = customtkinter.CTkButton(self.screen, width=200, height=30, text="Entrar", fg_color=LIGHT_BLUE, hover_color=DARK_BLUE, command=lambda: self.check_user())
         login_button.place(x = self.width/2, y = self.height/2 + 40, anchor="center")
 
         link_forgot_password = customtkinter.CTkButton(self.screen, width=0, height=0, text="Esqueceu a senha?", command=lambda: self.create_forgot_password_screen(), text_color=LIGHT_BLUE, fg_color="transparent", hover=False, cursor="hand2")
@@ -95,6 +97,17 @@ class Manager():
         y = (screen_height / 2) -  ( self.height / 2)
 
         self.screen.geometry("%dx%d+%d+%d" % (self.width, self.height, x, y))
+
+    def create_manager_user_screen(self):
+        options_frame = customtkinter.CTkFrame(self.screen, width=200, height=600, fg_color=LIGHT_GRAY)
+        options_frame.pack(side=customtkinter.LEFT)
+        options_frame.pack_propagate(False)
+
+        main_frame = customtkinter.CTkFrame(self.screen, width=800, height=600, fg_color=DARK_GRAY)
+        main_frame.pack()
+        main_frame.pack_propagate(False)
+
+        self.screen.mainloop()
 
 if __name__ == "__main__":
     Login().create_login_screen()
