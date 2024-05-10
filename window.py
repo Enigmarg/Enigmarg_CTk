@@ -43,7 +43,7 @@ class Window():
         login_button = customtkinter.CTkButton(self.screen, width=200, height=30, text="Login", fg_color=blue_link_color, hover_color=blue_link_hover_color, command=None)
         login_button.place(x=WIDTH/2, y=HEIGHT/2 + 40, anchor="center")
 
-        login_link_button = customtkinter.CTkButton(self.screen, width=0, height=0, text="Esqueceu a senha?", command=None, text_color=blue_link_color, fg_color="transparent", hover=False, cursor="hand2")
+        login_link_button = customtkinter.CTkButton(self.screen, width=0, height=0, text="Esqueceu a senha?", command=self.create_forgot_password_screen, text_color=blue_link_color, fg_color="transparent", hover=False, cursor="hand2")
         login_link_button.place(x=WIDTH/2, y=HEIGHT/2 + 80, anchor="center")
 
         self.screen.mainloop()
@@ -58,7 +58,7 @@ class Window():
         login_button = customtkinter.CTkButton(self.screen, width=200, height=30, text="Enviar", fg_color=blue_link_color, hover_color=blue_link_hover_color, command=None)
         login_button.place(x=WIDTH/2, y=HEIGHT/2 + 20, anchor="center")
 
-        login_link_button = customtkinter.CTkButton(self.screen, width=0, height=0, text="Voltar", command=None, text_color=blue_link_color, fg_color="transparent", hover=False, cursor="hand2")
+        login_link_button = customtkinter.CTkButton(self.screen, width=0, height=0, text="Voltar", command=self.create_login_screen, text_color=blue_link_color, fg_color="transparent", hover=False, cursor="hand2")
         login_link_button.place(x=WIDTH/2, y=HEIGHT/2 + 60, anchor="center")
 
         self.screen.mainloop()
@@ -80,4 +80,4 @@ class Window():
             messagebox.showerror("Erro", "Email ou senha incorretos")
 
 if __name__ == "__main__":
-    Window().create_forgot_password_screen()
+    Window().create_login_screen()
