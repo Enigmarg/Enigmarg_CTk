@@ -145,6 +145,14 @@ class Manager():
         main_frame.pack()
         main_frame.pack_propagate(False)
 
+        entrys_frame = customtkinter.CTkFrame(main_frame, width=self.width/2 - 20, height=self.height - 150, fg_color=DARK_GRAY)
+        entrys_frame.place(x=200, y=240, anchor="center")
+
+        table_frame = customtkinter.CTkFrame(main_frame, width=self.width/2 - 10, height=self.height - 150, fg_color=DARK_GRAY)
+        table_frame.place(x=595, y=240, anchor="center")
+
+        buttons_frame = customtkinter.CTkFrame(main_frame, width=self.width - 20, height=self.height/8, fg_color=DARK_GRAY)
+        buttons_frame.place(x=400, y=510, anchor="center")
         
         questions_btn = customtkinter.CTkButton(options_frame, text="Questões", width=150, height=40, font=("Arial", 15, "bold"), fg_color=LIGHT_GRAY, hover=False, cursor="hand2", corner_radius=0)
         questions_btn.place(x=225, y=20, anchor="center") 
