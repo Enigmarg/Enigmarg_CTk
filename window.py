@@ -87,7 +87,7 @@ class Manager():
 
     def __init__(self):
         self.width = 800
-        self.height = 600
+        self.height = 500
         self.screen = customtkinter.CTk()
         self.screen.title("Gerenciador")
         customtkinter.set_appearance_mode("dark")
@@ -115,19 +115,36 @@ class Manager():
         questions_btn = customtkinter.CTkButton(options_frame, width=150, height=40, text="Questões", font=("Arial", 15, "bold"), command=lambda: self.create_manager_question_screen(), fg_color=DARK_GRAY, hover=False, cursor="hand2", corner_radius=0)
         questions_btn.place(x=225, y=20, anchor="center") 
 
-        
         main_frame = customtkinter.CTkFrame(self.screen, width=self.width, height=self.height, fg_color=LIGHT_GRAY)
         main_frame.pack()
         main_frame.pack_propagate(False)
 
-        entrys_frame = customtkinter.CTkFrame(main_frame, width=self.width/2 - 20, height=self.height - 150, fg_color=DARK_GRAY)
-        entrys_frame.place(x=200, y=240, anchor="center")
+        entrys_frame = customtkinter.CTkFrame(main_frame, width=self.width/2 - 20, height=self.height - 170, fg_color=DARK_GRAY)
+        entrys_frame.place(x=200, y=180, anchor="center")
 
-        table_frame = customtkinter.CTkFrame(main_frame, width=self.width/2 - 10, height=self.height - 150, fg_color=DARK_GRAY)
-        table_frame.place(x=595, y=240, anchor="center")
+        email_entry = customtkinter.CTkEntry(entrys_frame, placeholder_text="E-mail", width=300, height=40)
+        email_entry.place(x=190, y=100, anchor="center")
 
-        buttons_frame = customtkinter.CTkFrame(main_frame, width=self.width - 20, height=self.height/8, fg_color=DARK_GRAY)
-        buttons_frame.place(x=400, y=510, anchor="center")
+        password_entry = customtkinter.CTkEntry(entrys_frame, placeholder_text="Senha", width=300, height=40, show="*")
+        password_entry.place(x=190, y=170, anchor="center")
+
+        role_option = customtkinter.CTkOptionMenu(entrys_frame, values=["Aluno", "Professor"], width=300, height=40)
+        role_option.place(x=190, y=240, anchor="center")
+
+        table_frame = customtkinter.CTkFrame(main_frame, width=self.width/2 - 10, height=self.height - 68, fg_color=DARK_GRAY)
+        table_frame.place(x=595, y=231, anchor="center")
+
+        buttons_frame = customtkinter.CTkFrame(main_frame, width=self.width/2 - 20, height=self.height/4 - 30, fg_color=DARK_GRAY)
+        buttons_frame.place(x=200, y=400, anchor="center")
+
+        add_btn = customtkinter.CTkButton(buttons_frame, text="Adicionar", width=100, height=40)
+        add_btn.place(x=15, y=25)
+
+        update_btn = customtkinter.CTkButton(buttons_frame, text="Atualizar", width=100, height=40)
+        update_btn.place(x=140, y=25)
+
+        delete_btn = customtkinter.CTkButton(buttons_frame, text="Deletar", width=100, height=40)
+        delete_btn.place(x=265, y=25)
 
         self.screen.mainloop()
 
@@ -141,21 +158,22 @@ class Manager():
         users_btn = customtkinter.CTkButton(options_frame, text="Usuários", width=150, height=40, font=("Arial", 15, "bold"), command=lambda: self.create_manager_user_screen(), fg_color=DARK_GRAY, hover=False, cursor="hand2", corner_radius=0)
         users_btn.place(x=75, y=20, anchor="center")
 
+        questions_btn = customtkinter.CTkButton(options_frame, text="Questões", width=150, height=40, font=("Arial", 15, "bold"), fg_color=LIGHT_GRAY, hover=False, cursor="hand2", corner_radius=0)
+        questions_btn.place(x=225, y=20, anchor="center") 
+
         main_frame = customtkinter.CTkFrame(self.screen, width=self.width, height=self.height, fg_color=LIGHT_GRAY)
         main_frame.pack()
         main_frame.pack_propagate(False)
 
-        entrys_frame = customtkinter.CTkFrame(main_frame, width=self.width/2 - 20, height=self.height - 150, fg_color=DARK_GRAY)
-        entrys_frame.place(x=200, y=240, anchor="center")
+        entrys_frame = customtkinter.CTkFrame(main_frame, width=self.width/2 - 20, height=self.height - 170, fg_color=DARK_GRAY)
+        entrys_frame.place(x=200, y=180, anchor="center")
 
-        table_frame = customtkinter.CTkFrame(main_frame, width=self.width/2 - 10, height=self.height - 150, fg_color=DARK_GRAY)
-        table_frame.place(x=595, y=240, anchor="center")
+        table_frame = customtkinter.CTkFrame(main_frame, width=self.width/2 - 10, height=self.height - 170, fg_color=DARK_GRAY)
+        table_frame.place(x=595, y=180, anchor="center")
 
-        buttons_frame = customtkinter.CTkFrame(main_frame, width=self.width - 20, height=self.height/8, fg_color=DARK_GRAY)
-        buttons_frame.place(x=400, y=510, anchor="center")
+        buttons_frame = customtkinter.CTkFrame(main_frame, width=self.width - 20, height=self.height/4 - 30, fg_color=DARK_GRAY)
+        buttons_frame.place(x=400, y=400, anchor="center")
         
-        questions_btn = customtkinter.CTkButton(options_frame, text="Questões", width=150, height=40, font=("Arial", 15, "bold"), fg_color=LIGHT_GRAY, hover=False, cursor="hand2", corner_radius=0)
-        questions_btn.place(x=225, y=20, anchor="center") 
 
         self.screen.mainloop()
 
