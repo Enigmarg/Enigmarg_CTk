@@ -11,6 +11,9 @@ DARK_BLUE = "#0059B3"
 LIGHT_GRAY = "#2A2A2A"
 DARK_GRAY = "#212121"
 
+BOLD_FONT = ("Arial", 15, "bold")
+NORMAL_FONT = ("Arial", 15, "normal")
+
 class Window():
 
     def clear_screen(window):
@@ -109,10 +112,10 @@ class Manager():
         options_frame.pack(side=customtkinter.TOP)
         options_frame.pack_propagate(False)
 
-        users_btn = customtkinter.CTkButton(options_frame, width=150, height=40, text="Usuários", font=("Arial", 15, "bold"), fg_color=LIGHT_GRAY, hover=False, cursor="hand2", corner_radius=0)
+        users_btn = customtkinter.CTkButton(options_frame, width=150, height=40, text="Usuários", font=BOLD_FONT, fg_color=LIGHT_GRAY, hover=False, cursor="hand2", corner_radius=0)
         users_btn.place(x=75, y=20, anchor="center")
         
-        questions_btn = customtkinter.CTkButton(options_frame, width=150, height=40, text="Questões", font=("Arial", 15, "bold"), command=lambda: self.create_manager_question_screen(), fg_color=DARK_GRAY, hover=False, cursor="hand2", corner_radius=0)
+        questions_btn = customtkinter.CTkButton(options_frame, width=150, height=40, text="Questões", font=BOLD_FONT, command=lambda: self.create_manager_question_screen(), fg_color=DARK_GRAY, hover=False, cursor="hand2", corner_radius=0)
         questions_btn.place(x=225, y=20, anchor="center") 
 
         main_frame = customtkinter.CTkFrame(self.screen, width=self.width, height=self.height, fg_color=LIGHT_GRAY)
@@ -122,14 +125,20 @@ class Manager():
         entrys_frame = customtkinter.CTkFrame(main_frame, width=self.width/2 - 20, height=self.height - 170, fg_color=DARK_GRAY)
         entrys_frame.place(x=200, y=180, anchor="center")
 
-        email_entry = customtkinter.CTkEntry(entrys_frame, placeholder_text="E-mail", width=300, height=40)
-        email_entry.place(x=190, y=100, anchor="center")
+        email_label = customtkinter.CTkLabel(entrys_frame, text="E-mail:", font=NORMAL_FONT)
+        email_label.place(x=45, y=40)
+        email_entry = customtkinter.CTkEntry(entrys_frame, width=300, height=40)
+        email_entry.place(x=190, y=90, anchor="center")
 
-        password_entry = customtkinter.CTkEntry(entrys_frame, placeholder_text="Senha", width=300, height=40, show="*")
-        password_entry.place(x=190, y=170, anchor="center")
+        password_label = customtkinter.CTkLabel(entrys_frame, text="Senha:", font=NORMAL_FONT)
+        password_label.place(x=45, y=130)
+        password_entry = customtkinter.CTkEntry(entrys_frame, width=300, height=40, show="*")
+        password_entry.place(x=190, y=180, anchor="center")
 
+        role_label = customtkinter.CTkLabel(entrys_frame, text="Cargo:", font=NORMAL_FONT)
+        role_label.place(x=45, y=220)
         role_option = customtkinter.CTkOptionMenu(entrys_frame, values=["Aluno", "Professor"], width=300, height=40)
-        role_option.place(x=190, y=240, anchor="center")
+        role_option.place(x=190, y=270, anchor="center")
 
         table_frame = customtkinter.CTkFrame(main_frame, width=self.width/2 - 10, height=self.height - 68, fg_color=DARK_GRAY)
         table_frame.place(x=595, y=231, anchor="center")
@@ -137,13 +146,13 @@ class Manager():
         buttons_frame = customtkinter.CTkFrame(main_frame, width=self.width/2 - 20, height=self.height/4 - 30, fg_color=DARK_GRAY)
         buttons_frame.place(x=200, y=400, anchor="center")
 
-        add_btn = customtkinter.CTkButton(buttons_frame, text="Adicionar", width=100, height=40)
+        add_btn = customtkinter.CTkButton(buttons_frame, text="Adicionar", width=100, height=40, corner_radius=50)
         add_btn.place(x=15, y=25)
 
-        update_btn = customtkinter.CTkButton(buttons_frame, text="Atualizar", width=100, height=40)
+        update_btn = customtkinter.CTkButton(buttons_frame, text="Atualizar", width=100, height=40, corner_radius=50)
         update_btn.place(x=140, y=25)
 
-        delete_btn = customtkinter.CTkButton(buttons_frame, text="Deletar", width=100, height=40)
+        delete_btn = customtkinter.CTkButton(buttons_frame, text="Deletar", width=100, height=40, corner_radius=50)
         delete_btn.place(x=265, y=25)
 
         self.screen.mainloop()
@@ -155,10 +164,10 @@ class Manager():
         options_frame.pack(side=customtkinter.TOP)
         options_frame.pack_propagate(False)
 
-        users_btn = customtkinter.CTkButton(options_frame, text="Usuários", width=150, height=40, font=("Arial", 15, "bold"), command=lambda: self.create_manager_user_screen(), fg_color=DARK_GRAY, hover=False, cursor="hand2", corner_radius=0)
+        users_btn = customtkinter.CTkButton(options_frame, text="Usuários", width=150, height=40, font=BOLD_FONT, command=lambda: self.create_manager_user_screen(), fg_color=DARK_GRAY, hover=False, cursor="hand2", corner_radius=0)
         users_btn.place(x=75, y=20, anchor="center")
 
-        questions_btn = customtkinter.CTkButton(options_frame, text="Questões", width=150, height=40, font=("Arial", 15, "bold"), fg_color=LIGHT_GRAY, hover=False, cursor="hand2", corner_radius=0)
+        questions_btn = customtkinter.CTkButton(options_frame, text="Questões", width=150, height=40, font=BOLD_FONT, fg_color=LIGHT_GRAY, hover=False, cursor="hand2", corner_radius=0)
         questions_btn.place(x=225, y=20, anchor="center") 
 
         main_frame = customtkinter.CTkFrame(self.screen, width=self.width, height=self.height, fg_color=LIGHT_GRAY)
