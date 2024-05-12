@@ -11,7 +11,7 @@ class Database():
         self.user = os.getenv("USER")
         self.password = os.getenv("PASSWORD")
         self.database = os.getenv("DATABASE")
-        self.port = os.getenv("PORT")
+        # self.port = os.getenv("PORT")
 
     def connect(self):
         try:
@@ -20,8 +20,8 @@ class Database():
                 password = self.password,
                 host = self.host,
                 database = self.database,
-                port = self.port,
-                client_flags = [ClientFlag.SSL],
+                # port = self.port,
+                # client_flags = [ClientFlag.SSL],
                 # "ssl_ca": "/opt/mysql/ssl/ca.pem",
                 # "ssl_cert": "/opt/mysql/ssl/client-cert.pem",
                 # "ssl_key": "/opt/mysql/ssl/client-key.pem",
@@ -33,12 +33,13 @@ class Database():
             print(f"Falha na conexão! {err}")
             return None
         
-    def add_user_to_database(self, email, password, role_id):
-        sql = ("INSERT INTO tb_user(user_email, user_password, role_id) VALUES (%s, %s, %s)" % email, password, role_id) # Ainda é necessário a implementação de uma janela com a opção de seleção de cargos.
+    def get_all_users(self):
+        sql = ("SELECT tb_user.user_email, role_name FROM tb_role INNER JOIN tb_user ON tb_user.role_id = tb_role.role_id")
         self.cursor.execute(sql)
-        self.cnx.commit()
+        users = self.cursor.fetchall()
+        return users
 
-    def get_password_from_database(self, email):
+    def get_user_password(self, email):
         try:
             sql = ("SELECT user_password FROM tb_user WHERE user_email='%s'" % email)
             self.cursor.execute(sql)

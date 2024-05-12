@@ -76,7 +76,7 @@ class Login():
         return sha256(password.encode("utf-8")).hexdigest()
     
     def check_user(self):
-        if self.get_password() == database.get_password_from_database(self.get_email()):
+        if self.get_password() == database.get_user_password(self.get_email()):
             print("Login feito com sucesso!")
             self.screen.destroy()
         else:
@@ -100,6 +100,12 @@ class Manager():
         y = (screen_height / 2) -  ( self.height / 2)
 
         self.screen.geometry("%dx%d+%d+%d" % (self.width, self.height, x, y))
+
+    def add_to_treeview(self):
+        users = database.get_all_users()
+        self.tree.delete(*self.tree.get_children())
+        for user in users:
+            self.tree.insert("", "end", values=user)
 
     def create_manager_screen(self):
 
@@ -125,7 +131,7 @@ class Manager():
         role_option = customtkinter.CTkOptionMenu(tabView.tab("Usuários"), values=["Aluno", "Professor"], width=300, height=40, fg_color="gray30", button_color="gray23", hover=False)
         role_option.place(x=190, y=260, anchor="center")
 
-        add_btn = customtkinter.CTkButton(tabView.tab("Usuários"), text="Adicionar", width=90, height=40, corner_radius=50, fg_color="steel blue", hover=False, cursor="hand2")
+        add_btn = customtkinter.CTkButton(tabView.tab("Usuários"), text="Adicionar", width=90, height=40, corner_radius=50, fg_color="steel blue", hover=False, command=self.add_to_treeview, cursor="hand2")
         add_btn.place(x=90, y=370, anchor="center")
 
         update_btn = customtkinter.CTkButton(tabView.tab("Usuários"), text="Atualizar", width=90, height=40, corner_radius=50, fg_color="steel blue", hover=False, cursor="hand2")
@@ -135,22 +141,19 @@ class Manager():
         delete_btn.place(x=290, y=370, anchor="center")
 
         # TreeView
-        # style = ttk.Style(tabView.tab("Usuários"))
-        # style.configure("Treeview", font=BOLD_FONT, foreground="#fff", background='#000', fieldbackground="#313837")
-        # style.map("Treeview", background=[("selected", "#1A8F2D")])
+        self.tree = ttk.Treeview(tabView.tab("Usuários"), height=17)
+        self.tree["column"] = ("Email", "Cargo")
 
-        tree = ttk.Treeview(tabView.tab("Usuários"), height=17)
-        tree["column"] = ("Email", "Cargo")
+        self.tree.column("#0", width=0, stretch=tk.NO)
+        self.tree.column("Email", anchor=tk.CENTER, width=150)
+        self.tree.column("Cargo", anchor=tk.CENTER, width=150)
 
-        tree.column("#0", width=0, stretch=tk.NO)
-        tree.column("Email", anchor=tk.CENTER, width=150)
-        tree.column("Cargo", anchor=tk.CENTER, width=150)
+        self.tree.heading("Email", text="Email")
+        self.tree.heading("Cargo", text="Cargo")
 
-        tree.heading("Email", text="Email")
-        tree.heading("Cargo", text="Cargo")
+        self.tree.place(x=380, y=30)
 
-        tree.place(x=380, y=30)
-        
+        self.add_to_treeview()
         self.screen.mainloop()
 
 if __name__ == "__main__":
