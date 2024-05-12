@@ -11,12 +11,6 @@ database.connect()
 BOLD_FONT = ("Arial", 15, "bold")
 NORMAL_FONT = ("Arial", 15, "normal")
 
-class Window():
-
-    def clear_screen(window):
-        for widget in window.screen.winfo_children():
-            widget.destroy()
-
 class Login():
 
     def __init__(self):
@@ -34,8 +28,12 @@ class Login():
 
         self.screen.geometry("%dx%d+%d+%d" % (self.width, self.height, x, y))
 
+    def clear_screen(self):
+        for widget in self.screen.winfo_children():
+            widget.destroy()
+
     def create_login_screen(self):
-        Window.clear_screen(self)
+        self.clear_screen()
         self.screen.title("Login")
 
         self.email_input = customtkinter.CTkEntry(self.screen, width=200, height=30, placeholder_text="E-mail")
@@ -53,7 +51,7 @@ class Login():
         self.screen.mainloop()
 
     def create_forgot_password_screen(self):
-        Window.clear_screen(self)
+        self.clear_screen()
         self.screen.title("Login")
 
         self.email_input = customtkinter.CTkEntry(self.screen, width=200, height=30, placeholder_text="E-mail")
@@ -107,6 +105,17 @@ class Manager():
         for user in users:
             self.tree.insert("", "end", values=user)
 
+    def add_user(self):
+        email = self.get_email()
+        password = self.get_password()
+        role = self.get_role()
+        
+        if not (email and password and role):
+            messagebox.showerror("Erro", "Preencha todos os campos.")
+        else:
+            database.add_user(email, password, role)
+            self.add_to_treeview()
+
     def create_manager_screen(self):
 
         # TabView
@@ -118,26 +127,26 @@ class Manager():
         # Entrys
         email_label = customtkinter.CTkLabel(tabView.tab("Usuários"), text="E-mail:", font=NORMAL_FONT)
         email_label.place(x=45, y=30)
-        email_entry = customtkinter.CTkEntry(tabView.tab("Usuários"), width=300, height=40)
-        email_entry.place(x=190, y=80, anchor="center")
+        self.email_entry = customtkinter.CTkEntry(tabView.tab("Usuários"), width=300, height=40)
+        self.email_entry.place(x=190, y=80, anchor="center")
 
         password_label = customtkinter.CTkLabel(tabView.tab("Usuários"), text="Senha:", font=NORMAL_FONT)
         password_label.place(x=45, y=120)
-        password_entry = customtkinter.CTkEntry(tabView.tab("Usuários"), width=300, height=40, show="*")
-        password_entry.place(x=190, y=170, anchor="center")
+        self.password_entry = customtkinter.CTkEntry(tabView.tab("Usuários"), width=300, height=40, show="*")
+        self.password_entry.place(x=190, y=170, anchor="center")
 
         role_label = customtkinter.CTkLabel(tabView.tab("Usuários"), text="Cargo:", font=NORMAL_FONT)
         role_label.place(x=45, y=210)
-        role_option = customtkinter.CTkOptionMenu(tabView.tab("Usuários"), values=["Aluno", "Professor"], width=300, height=40, fg_color="gray30", button_color="gray23", hover=False)
-        role_option.place(x=190, y=260, anchor="center")
+        self.role_option = customtkinter.CTkOptionMenu(tabView.tab("Usuários"), values=["Aluno", "Professor"], width=300, height=40, fg_color="gray30", button_color="gray23", hover=False)
+        self.role_option.place(x=190, y=260, anchor="center")
 
-        add_btn = customtkinter.CTkButton(tabView.tab("Usuários"), text="Adicionar", width=90, height=40, corner_radius=50, fg_color="steel blue", hover=False, command=self.add_to_treeview, cursor="hand2")
+        add_btn = customtkinter.CTkButton(tabView.tab("Usuários"), text="Adicionar", width=90, height=40, corner_radius=50, fg_color="royal blue", hover=False, command=self.add_user, cursor="hand2")
         add_btn.place(x=90, y=370, anchor="center")
 
-        update_btn = customtkinter.CTkButton(tabView.tab("Usuários"), text="Atualizar", width=90, height=40, corner_radius=50, fg_color="steel blue", hover=False, cursor="hand2")
+        update_btn = customtkinter.CTkButton(tabView.tab("Usuários"), text="Atualizar", width=90, height=40, corner_radius=50, fg_color="royal blue", hover=False, cursor="hand2")
         update_btn.place(x=192, y=370, anchor="center")
 
-        delete_btn = customtkinter.CTkButton(tabView.tab("Usuários"), text="Deletar", width=90, height=40, corner_radius=50, fg_color="steel blue", hover=False, cursor="hand2")
+        delete_btn = customtkinter.CTkButton(tabView.tab("Usuários"), text="Deletar", width=90, height=40, corner_radius=50, fg_color="royal blue", hover=False, cursor="hand2")
         delete_btn.place(x=290, y=370, anchor="center")
 
         # TreeView
@@ -155,6 +164,18 @@ class Manager():
 
         self.add_to_treeview()
         self.screen.mainloop()
+
+    def get_email(self):
+        email = self.email_entry.get()
+        return email
+    
+    def get_password(self):
+        password = self.password_entry.get()
+        return sha256(password.encode("utf-8")).hexdigest()
+    
+    def get_role(self):
+        role = self.role_option.get()   
+        return role
 
 if __name__ == "__main__":
     # Login().create_login_screen()

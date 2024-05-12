@@ -33,12 +33,6 @@ class Database():
             print(f"Falha na conexão! {err}")
             return None
         
-    def get_all_users(self):
-        sql = ("SELECT tb_user.user_email, role_name FROM tb_role INNER JOIN tb_user ON tb_user.role_id = tb_role.role_id")
-        self.cursor.execute(sql)
-        users = self.cursor.fetchall()
-        return users
-
     def get_user_password(self, email):
         try:
             sql = ("SELECT user_password FROM tb_user WHERE user_email='%s'" % email)
@@ -48,3 +42,14 @@ class Database():
             return password
         except Exception as e:
             print(e)
+            
+    def get_all_users(self):
+        sql = ("SELECT tb_user.user_email, role_name FROM tb_role INNER JOIN tb_user ON tb_user.role_id = tb_role.role_id")
+        self.cursor.execute(sql)
+        users = self.cursor.fetchall()
+        return users
+        
+    def add_user(self, email, password, role):
+        sql = ("INSERT INTO tb_user (user_email, user_password, role_id) SELECT '%s', '%s', role_id FROM tb_role WHERE tb_role.role_name = '%s'" % (email, password, role))
+        self.cursor.execute(sql)
+        self.cnx.commit()
