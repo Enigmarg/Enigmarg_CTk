@@ -54,6 +54,11 @@ class Database():
         self.cursor.execute(sql)
         self.cnx.commit()
 
+    def update_user(self, email, password, role):
+        sql = ("UPDATE tb_user JOIN tb_role ON tb_role.role_name = '%s' SET tb_user.user_email = '%s', tb_user.user_password = '%s', tb_user.role_id = tb_role.role_id WHERE tb_user.user_email = '%s'" % (role, email, password, email))
+        self.cursor.execute(sql)
+        self.cnx.commit()
+
     def delete_user(self, email):
         sql = ("DELETE FROM tb_user WHERE user_email = '%s'" % email)
         self.cursor.execute(sql)

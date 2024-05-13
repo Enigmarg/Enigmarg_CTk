@@ -130,19 +130,32 @@ class Manager():
         if not (email and password and role):
             messagebox.showerror("Erro", "Preencha todos os campos.")
         else:
-            database.add_user(email, password, role)
+            database.add_user(email, sha256(password.encode("utf-8")).hexdigest(), role)
             self.add_to_treeview()
 
     def delete_user(self):
         selected_item = self.tree.focus()
         if not selected_item:
-            messagebox.showerror("Erro", "Selecione um usuário para deletar.")
+            # messagebox.showerror("Erro", "Selecione um usuário para deletar.")
+            pass
         else:
             email = self.get_email()
             database.delete_user(email)
             self.add_to_treeview()
             self.clear()
-            messagebox.showinfo("Sucesso", "O usuário foi deletado.")
+            # messagebox.showinfo("Sucesso", "O usuário foi deletado.")
+
+    def update_user(self):
+        email = self.get_email()
+        password = self.get_password()
+        role = self.get_role()
+        if not (email and password and role):
+            messagebox.showerror("Erro", "Preencha todos os campos.")
+        else:
+            database.update_user(email, sha256(password.encode("utf-8")).hexdigest(), role)
+            self.add_to_treeview()
+            self.clear()
+            # messagebox.showinfo("Sucesso", "O usuário foi atualizado.")
 
     def create_manager_screen(self):
 
@@ -171,7 +184,7 @@ class Manager():
         add_btn = customtkinter.CTkButton(tabView.tab("Usuários"), text="Adicionar", width=90, height=40, corner_radius=50, fg_color="royal blue", hover=False, command=self.add_user, cursor="hand2")
         add_btn.place(x=90, y=370, anchor="center")
 
-        update_btn = customtkinter.CTkButton(tabView.tab("Usuários"), text="Atualizar", width=90, height=40, corner_radius=50, fg_color="royal blue", hover=False, cursor="hand2")
+        update_btn = customtkinter.CTkButton(tabView.tab("Usuários"), text="Atualizar", width=90, height=40, corner_radius=50, fg_color="royal blue", hover=False, command=self.update_user,  cursor="hand2")
         update_btn.place(x=192, y=370, anchor="center")
 
         delete_btn = customtkinter.CTkButton(tabView.tab("Usuários"), text="Deletar", width=90, height=40, corner_radius=50, fg_color="royal blue", hover=False, command=self.delete_user,  cursor="hand2")
@@ -200,7 +213,7 @@ class Manager():
     
     def get_password(self):
         password = self.password_entry.get()
-        return sha256(password.encode("utf-8")).hexdigest()
+        return password
     
     def get_role(self):
         role = self.role_option.get()   
