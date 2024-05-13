@@ -105,6 +105,23 @@ class Manager():
         for user in users:
             self.tree.insert("", "end", values=user)
 
+    def clear(self, *clicked):
+        if clicked:
+            self.tree.selection_remove(self.tree.focus())
+        self.email_entry.delete(0, "end")
+        self.password_entry.delete(0, "end")
+        self.role_option.set("Aluno")
+
+    def display_user(self, event):
+        selected_items = self.tree.focus()
+        if selected_items:
+            row = self.tree.item(selected_items)["values"]
+            self.clear()
+            self.email_entry.insert(0, row[0])
+            self.role_option.set(row[1])
+        else:
+            pass
+
     def add_user(self):
         email = self.get_email()
         password = self.get_password()
@@ -115,6 +132,17 @@ class Manager():
         else:
             database.add_user(email, password, role)
             self.add_to_treeview()
+
+    def delete_user(self):
+        selected_item = self.tree.focus()
+        if not selected_item:
+            messagebox.showerror("Erro", "Selecione um usuário para deletar.")
+        else:
+            email = self.get_email()
+            database.delete_user(email)
+            self.add_to_treeview()
+            self.clear()
+            messagebox.showinfo("Sucesso", "O usuário foi deletado.")
 
     def create_manager_screen(self):
 
@@ -146,7 +174,7 @@ class Manager():
         update_btn = customtkinter.CTkButton(tabView.tab("Usuários"), text="Atualizar", width=90, height=40, corner_radius=50, fg_color="royal blue", hover=False, cursor="hand2")
         update_btn.place(x=192, y=370, anchor="center")
 
-        delete_btn = customtkinter.CTkButton(tabView.tab("Usuários"), text="Deletar", width=90, height=40, corner_radius=50, fg_color="royal blue", hover=False, cursor="hand2")
+        delete_btn = customtkinter.CTkButton(tabView.tab("Usuários"), text="Deletar", width=90, height=40, corner_radius=50, fg_color="royal blue", hover=False, command=self.delete_user,  cursor="hand2")
         delete_btn.place(x=290, y=370, anchor="center")
 
         # TreeView
@@ -162,6 +190,7 @@ class Manager():
 
         self.tree.place(x=380, y=30)
 
+        self.tree.bind("<ButtonRelease>", self.display_user)
         self.add_to_treeview()
         self.screen.mainloop()
 

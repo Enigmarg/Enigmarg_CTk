@@ -53,3 +53,8 @@ class Database():
         sql = ("INSERT INTO tb_user (user_email, user_password, role_id) SELECT '%s', '%s', role_id FROM tb_role WHERE tb_role.role_name = '%s'" % (email, password, role))
         self.cursor.execute(sql)
         self.cnx.commit()
+
+    def delete_user(self, email):
+        sql = ("DELETE FROM tb_user WHERE user_email = '%s'" % email)
+        self.cursor.execute(sql)
+        self.cnx.commit()
