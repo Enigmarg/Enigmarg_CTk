@@ -149,13 +149,15 @@ class Manager():
         email = self.get_email()
         password = self.get_password()
         role = self.get_role()
-        if not (email and password and role):
-            messagebox.showerror("Erro", "Preencha todos os campos.")
-        else:
+        if (email and password and role):
             database.update_user(email, sha256(password.encode("utf-8")).hexdigest(), role)
             self.add_to_treeview()
             self.clear()
             # messagebox.showinfo("Sucesso", "O usuário foi atualizado.")
+        elif (email and role):
+            database.update_user(email, None, role)
+            self.add_to_treeview()
+            self.clear()
 
     def create_manager_screen(self):
 
