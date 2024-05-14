@@ -8,8 +8,7 @@ from hashlib import sha256
 database = Database()
 database.connect()
 
-BOLD_FONT = ("Arial", 15, "bold")
-NORMAL_FONT = ("Arial", 15, "normal")
+BOLD_FONT = ("Arial", 12, "bold")
 
 class Login():
 
@@ -17,6 +16,7 @@ class Login():
         self.width = 380
         self.height = 450
         self.screen = customtkinter.CTk()
+        self.screen.configure(fg_color="gray15")
         customtkinter.set_appearance_mode("dark")
         self.screen.resizable(False, False)
 
@@ -87,6 +87,7 @@ class Manager():
         self.width = 800
         self.height = 500
         self.screen = customtkinter.CTk()
+        self.screen.configure(fg_color="gray15")
         self.screen.title("Gerenciador")
         customtkinter.set_appearance_mode("dark")
         self.screen.resizable(False, False)
@@ -162,34 +163,34 @@ class Manager():
     def create_manager_screen(self):
 
         # TabView
-        tabView = customtkinter.CTkTabview(self.screen, width=self.width - 70, height=self.height - 20)
+        tabView = customtkinter.CTkTabview(self.screen, width=self.width - 70, height=self.height - 20, fg_color="gray16")
         tabView.pack()
         tabView.add("Usuários")
         tabView.add("Questões")
 
         # Entrys
-        email_label = customtkinter.CTkLabel(tabView.tab("Usuários"), text="E-mail:", font=NORMAL_FONT)
+        email_label = customtkinter.CTkLabel(tabView.tab("Usuários"), text="E-mail:")
         email_label.place(x=45, y=30)
-        self.email_entry = customtkinter.CTkEntry(tabView.tab("Usuários"), width=300, height=40)
+        self.email_entry = customtkinter.CTkEntry(tabView.tab("Usuários"), width=300, height=40, fg_color="gray25", border_width=0)
         self.email_entry.place(x=190, y=80, anchor="center")
 
-        password_label = customtkinter.CTkLabel(tabView.tab("Usuários"), text="Senha:", font=NORMAL_FONT)
+        password_label = customtkinter.CTkLabel(tabView.tab("Usuários"), text="Senha:")
         password_label.place(x=45, y=120)
-        self.password_entry = customtkinter.CTkEntry(tabView.tab("Usuários"), width=300, height=40, show="*")
+        self.password_entry = customtkinter.CTkEntry(tabView.tab("Usuários"), width=300, height=40, show="*", fg_color="gray25", border_width=0)
         self.password_entry.place(x=190, y=170, anchor="center")
 
-        role_label = customtkinter.CTkLabel(tabView.tab("Usuários"), text="Cargo:", font=NORMAL_FONT)
+        role_label = customtkinter.CTkLabel(tabView.tab("Usuários"), text="Cargo:")
         role_label.place(x=45, y=210)
-        self.role_option = customtkinter.CTkOptionMenu(tabView.tab("Usuários"), values=["Aluno", "Professor"], width=300, height=40, fg_color="gray30", button_color="gray23", hover=False)
+        self.role_option = customtkinter.CTkOptionMenu(tabView.tab("Usuários"), values=["Aluno", "Professor"], width=300, height=40, fg_color="gray25", button_color="gray25", hover=False)
         self.role_option.place(x=190, y=260, anchor="center")
 
-        add_btn = customtkinter.CTkButton(tabView.tab("Usuários"), text="Adicionar", width=90, height=40, corner_radius=50, fg_color="royal blue", hover=False, command=self.add_user, cursor="hand2")
+        add_btn = customtkinter.CTkButton(tabView.tab("Usuários"), text="Adicionar", width=90, height=40, corner_radius=50, font=BOLD_FONT, text_color="royal blue", fg_color="transparent", border_width=1, border_color="royal blue", hover=False, command=self.add_user, cursor="hand2")
         add_btn.place(x=90, y=370, anchor="center")
 
-        update_btn = customtkinter.CTkButton(tabView.tab("Usuários"), text="Atualizar", width=90, height=40, corner_radius=50, fg_color="royal blue", hover=False, command=self.update_user,  cursor="hand2")
+        update_btn = customtkinter.CTkButton(tabView.tab("Usuários"), text="Atualizar", width=90, height=40, corner_radius=50, font=BOLD_FONT, text_color="royal blue", fg_color="transparent", border_width=1, border_color="royal blue", hover=False, command=self.update_user,  cursor="hand2")
         update_btn.place(x=192, y=370, anchor="center")
 
-        delete_btn = customtkinter.CTkButton(tabView.tab("Usuários"), text="Deletar", width=90, height=40, corner_radius=50, fg_color="royal blue", hover=False, command=self.delete_user,  cursor="hand2")
+        delete_btn = customtkinter.CTkButton(tabView.tab("Usuários"), text="Deletar", width=90, height=40, corner_radius=50, font=BOLD_FONT, fg_color="royal blue", hover=False, command=self.delete_user,  cursor="hand2")
         delete_btn.place(x=290, y=370, anchor="center")
 
         # TreeView
