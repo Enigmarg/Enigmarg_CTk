@@ -194,7 +194,9 @@ class Manager():
         delete_btn.place(x=290, y=370, anchor="center")
 
         # TreeView
-        self.tree = ttk.Treeview(tabView.tab("Usuários"), height=17)
+        style = ttk.Style()
+        style.map("Treeview", background=[("selected", "royal blue")])
+        self.tree = ttk.Treeview(tabView.tab("Usuários"))
         self.tree["column"] = ("Email", "Cargo")
 
         self.tree.column("#0", width=0, stretch=tk.NO)
@@ -204,7 +206,7 @@ class Manager():
         self.tree.heading("Email", text="Email")
         self.tree.heading("Cargo", text="Cargo")
 
-        self.tree.place(relx=0.53, rely=0.07, relwidth=0.45, relheight=0.83)
+        self.tree.place(relx=0.53, rely=0.07, relwidth=0.45, relheight=0.79)
 
         self.tree.bind("<ButtonRelease>", self.display_user)
         self.add_to_treeview()
