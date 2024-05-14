@@ -201,7 +201,7 @@ class Manager():
         self.tree.heading("Email", text="Email")
         self.tree.heading("Cargo", text="Cargo")
 
-        self.tree.place(x=380, y=30)
+        self.tree.place(relx=0.53, rely=0.07, relwidth=0.45, relheight=0.83)
 
         self.tree.bind("<ButtonRelease>", self.display_user)
         self.add_to_treeview()
