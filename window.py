@@ -163,7 +163,7 @@ class Manager():
     def create_manager_screen(self):
 
         # TabView
-        tabView = customtkinter.CTkTabview(self.screen, width=self.width - 70, height=self.height - 20, fg_color="gray16")
+        tabView = customtkinter.CTkTabview(self.screen, width=self.width, height=self.height, fg_color="gray15")
         tabView.pack()
         tabView.add("Usuários")
         tabView.add("Questões")
