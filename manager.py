@@ -62,16 +62,10 @@ class Manager():
             self.clear()
 
     def delete_user(self):
-        selected_item = self.tree.focus()
-        if not selected_item:
-            # messagebox.showerror("Erro", "Selecione um usuário para deletar.")
-            pass
-        else:
-            email = self.get_email()
-            database.delete_user(email)
-            self.add_to_treeview()
-            self.clear()
-            # messagebox.showinfo("Sucesso", "O usuário foi deletado.")
+        email = self.get_email()
+        database.delete_user(email)
+        self.add_to_treeview()
+        self.clear()
 
     def update_user(self):
         email = self.get_email()
@@ -81,7 +75,6 @@ class Manager():
             database.update_user(email, sha256(password.encode("utf-8")).hexdigest(), role)
             self.add_to_treeview()
             self.clear()
-            # messagebox.showinfo("Sucesso", "O usuário foi atualizado.")
         elif (email and role):
             database.update_user(email, None, role)
             self.add_to_treeview()
