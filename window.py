@@ -17,8 +17,8 @@ class Login():
         self.width = 380
         self.height = 450
         self.screen = customtkinter.CTk()
-        self.screen.configure(fg_color="gray15")
-        customtkinter.set_appearance_mode("dark")
+        self.screen.configure(fg_color="sky blue")
+        customtkinter.set_appearance_mode("light")
         self.screen.resizable(False, False)
 
         # Centers the window
@@ -41,10 +41,10 @@ class Login():
         logo_label = customtkinter.CTkLabel(self.screen,text="", image=enigmarg_logo)
         logo_label.pack(pady=45)
 
-        self.email_input = customtkinter.CTkEntry(self.screen, width=200, height=30, placeholder_text="E-mail")
+        self.email_input = customtkinter.CTkEntry(self.screen, width=200, height=30, placeholder_text="E-mail", border_width=0)
         self.email_input.place(relx=0.5, rely=0.5, anchor="center")
 
-        self.password_input = customtkinter.CTkEntry(self.screen, width=200, height=30, placeholder_text="Senha", show="*")
+        self.password_input = customtkinter.CTkEntry(self.screen, width=200, height=30, placeholder_text="Senha", show="*", border_width=0)
         self.password_input.place(relx=0.5, rely=0.6, anchor="center")
 
         login_btn = customtkinter.CTkButton(self.screen, width=200, height=30, text="Entrar", fg_color="royal blue", hover=False, command=self.check_user)
@@ -63,7 +63,7 @@ class Login():
         logo_label = customtkinter.CTkLabel(self.screen,text="", image=enigmarg_logo)
         logo_label.pack(pady=45)
 
-        self.email_input = customtkinter.CTkEntry(self.screen, width=200, height=30, placeholder_text="E-mail")
+        self.email_input = customtkinter.CTkEntry(self.screen, width=200, height=30, placeholder_text="E-mail", border_width=0)
         self.email_input.place(relx=0.5, rely=0.5, anchor="center")
 
         send_btn = customtkinter.CTkButton(self.screen, width=200, height=30, text="Enviar", fg_color="royal blue", hover=False, command=None, cursor="hand2")
