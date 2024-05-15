@@ -4,6 +4,7 @@ from tkinter import ttk
 from tkinter import messagebox
 from database import Database
 from hashlib import sha256
+from PIL import Image
 
 database = Database()
 database.connect()
@@ -36,6 +37,10 @@ class Login():
         self.clear_screen()
         self.screen.title("Login")
 
+        enigmarg_logo = customtkinter.CTkImage(light_image=Image.open("resources/logo.png"), dark_image=Image.open("resources/logo.png"), size=(175, 137))
+        logo_label = customtkinter.CTkLabel(self.screen,text="", image=enigmarg_logo)
+        logo_label.pack(padx=0, pady=20)
+
         self.email_input = customtkinter.CTkEntry(self.screen, width=200, height=30, placeholder_text="E-mail")
         self.email_input.place(x=self.width/2, y=self.height/2 - 40, anchor="center")
 
@@ -53,6 +58,10 @@ class Login():
     def create_forgot_password_screen(self):
         self.clear_screen()
         self.screen.title("Login")
+
+        enigmarg_logo = customtkinter.CTkImage(light_image=Image.open("resources/logo.png"), dark_image=Image.open("resources/logo.png"), size=(175, 137))
+        logo_label = customtkinter.CTkLabel(self.screen,text="", image=enigmarg_logo)
+        logo_label.pack(pady=20)
 
         self.email_input = customtkinter.CTkEntry(self.screen, width=200, height=30, placeholder_text="E-mail")
         self.email_input.place(x=self.width/2, y=self.height/2 - 20, anchor="center")
@@ -225,5 +234,5 @@ class Manager():
         return role
 
 if __name__ == "__main__":
-    # Login().create_login_screen()
-    Manager().create_manager_screen()
+    Login().create_login_screen()
+    # Manager().create_manager_screen()
