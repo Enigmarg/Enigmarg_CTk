@@ -57,7 +57,7 @@ class Manager():
         if not (email and password and role):
             messagebox.showerror("Erro", "Preencha todos os campos.")
         else:
-            database.add_user(email, sha256(password.encode("utf-8")).hexdigest(), role)
+            database.add_user(email, password, role)
             self.add_to_treeview()
             self.clear()
 
@@ -72,7 +72,7 @@ class Manager():
         password = self.get_password()
         role = self.get_role()
         if (email and password and role):
-            database.update_user(email, sha256(password.encode("utf-8")).hexdigest(), role)
+            database.update_user(email, password, role)
             self.add_to_treeview()
             self.clear()
         elif (email and role):
@@ -138,7 +138,10 @@ class Manager():
     
     def get_password(self):
         password = self.password_entry.get()
-        return password
+        if password == "":
+            return password
+        else:
+           return sha256(password.encode("utf-8")).hexdigest() 
     
     def get_role(self):
         role = self.role_option.get()   
