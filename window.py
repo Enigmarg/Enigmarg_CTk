@@ -37,21 +37,21 @@ class Login():
         self.clear_screen()
         self.screen.title("Login")
 
-        enigmarg_logo = customtkinter.CTkImage(light_image=Image.open("resources/logo.png"), dark_image=Image.open("resources/logo.png"), size=(175, 137))
+        enigmarg_logo = customtkinter.CTkImage(light_image=Image.open("resources/logo.png"), dark_image=Image.open("resources/logo.png"), size=(185, 145))
         logo_label = customtkinter.CTkLabel(self.screen,text="", image=enigmarg_logo)
-        logo_label.pack(padx=0, pady=20)
+        logo_label.pack(pady=45)
 
         self.email_input = customtkinter.CTkEntry(self.screen, width=200, height=30, placeholder_text="E-mail")
-        self.email_input.place(x=self.width/2, y=self.height/2 - 40, anchor="center")
+        self.email_input.place(relx=0.5, rely=0.5, anchor="center")
 
         self.password_input = customtkinter.CTkEntry(self.screen, width=200, height=30, placeholder_text="Senha", show="*")
-        self.password_input.place(x=self.width/2, y=self.height/2, anchor="center")
+        self.password_input.place(relx=0.5, rely=0.6, anchor="center")
 
         login_btn = customtkinter.CTkButton(self.screen, width=200, height=30, text="Entrar", fg_color="royal blue", hover=False, command=self.check_user)
-        login_btn.place(x=self.width/2, y=self.height/2 + 40, anchor="center")
+        login_btn.place(relx=0.5, rely=0.7, anchor="center")
 
         forgot_password_btn = customtkinter.CTkButton(self.screen, width=0, height=0, text="Esqueceu a senha?", command=self.create_forgot_password_screen, text_color="royal blue", fg_color="transparent", hover=False, cursor="hand2")
-        forgot_password_btn.place(x=self.width/2, y=self.height/2 + 80, anchor="center")
+        forgot_password_btn.place(relx=0.5, rely=0.8, anchor="center")
 
         self.screen.mainloop()
 
@@ -59,18 +59,18 @@ class Login():
         self.clear_screen()
         self.screen.title("Login")
 
-        enigmarg_logo = customtkinter.CTkImage(light_image=Image.open("resources/logo.png"), dark_image=Image.open("resources/logo.png"), size=(175, 137))
+        enigmarg_logo = customtkinter.CTkImage(light_image=Image.open("resources/logo.png"), dark_image=Image.open("resources/logo.png"), size=(185, 145))
         logo_label = customtkinter.CTkLabel(self.screen,text="", image=enigmarg_logo)
-        logo_label.pack(pady=20)
+        logo_label.pack(pady=45)
 
         self.email_input = customtkinter.CTkEntry(self.screen, width=200, height=30, placeholder_text="E-mail")
-        self.email_input.place(x=self.width/2, y=self.height/2 - 20, anchor="center")
+        self.email_input.place(relx=0.5, rely=0.5, anchor="center")
 
         send_btn = customtkinter.CTkButton(self.screen, width=200, height=30, text="Enviar", fg_color="royal blue", hover=False, command=None, cursor="hand2")
-        send_btn.place(x=self.width/2, y=self.height/2 + 20, anchor="center")
+        send_btn.place(relx=0.5, rely=0.6, anchor="center")
 
         return_btn = customtkinter.CTkButton(self.screen, width=0, height=0, text="Voltar", command=self.create_login_screen, text_color="royal blue", fg_color="transparent", hover=False, cursor="hand2")
-        return_btn.place(x=self.width/2, y=self.height/2 + 60, anchor="center")
+        return_btn.place(relx=0.5, rely=0.7, anchor="center")
 
         self.screen.mainloop()
 
