@@ -142,6 +142,7 @@ class Manager():
         else:
             database.add_user(email, sha256(password.encode("utf-8")).hexdigest(), role)
             self.add_to_treeview()
+            self.clear()
 
     def delete_user(self):
         selected_item = self.tree.focus()
@@ -234,5 +235,5 @@ class Manager():
         return role
 
 if __name__ == "__main__":
-    Login().create_login_screen()
-    # Manager().create_manager_screen()
+    # Login().create_login_screen()
+    Manager().create_manager_screen()
