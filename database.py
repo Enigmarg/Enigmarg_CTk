@@ -44,7 +44,7 @@ class Database():
             print(e)
             
     def get_all_users(self):
-        sql = ("SELECT tb_user.user_email, role_name FROM tb_role INNER JOIN tb_user ON tb_user.role_id = tb_role.role_id")
+        sql = ("SELECT tb_user.user_email, role_name FROM tb_role INNER JOIN tb_user ON tb_user.role_id = tb_role.role_id WHERE role_name != 'Admin'")
         self.cursor.execute(sql)
         users = self.cursor.fetchall()
         return users
