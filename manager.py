@@ -115,6 +115,8 @@ class Manager():
 
         # TreeView
         style = ttk.Style()
+        style.theme_use("clam")
+        style.configure("Treeview", font=("Arial", 13, "normal"), background="gray15", foreground="white", fieldbackground="gray15")
         style.map("Treeview", background=[("selected", "royal blue")])
         self.tree = ttk.Treeview(tabView.tab("Usuários"))
         self.tree["column"] = ("Email", "Cargo")
@@ -127,6 +129,30 @@ class Manager():
         self.tree.heading("Cargo", text="Cargo")
 
         self.tree.place(relx=0.53, rely=0.07, relwidth=0.45, relheight=0.79)
+
+        question_label = customtkinter.CTkLabel(tabView.tab("Questões"), text="Pergunta:")
+        question_label.place(x=45, y=10)
+        self.question_entry = customtkinter.CTkEntry(tabView.tab("Questões"), width=310, height=40, fg_color="gray25", border_width=0)
+        self.question_entry.place(x=195, y=60, anchor="center")
+
+        answer1_label = customtkinter.CTkLabel(tabView.tab("Questões"), text="Alternativas:")
+        answer1_label.place(x=45, y=90)
+        self.answer1_entry = customtkinter.CTkEntry(tabView.tab("Questões"), width=240, height=40, fg_color="gray25", border_width=0)
+        self.answer1_entry.place(x=160, y=140, anchor="center")
+
+        self.answer2_entry = customtkinter.CTkEntry(tabView.tab("Questões"), width=240, height=40, fg_color="gray25", border_width=0)
+        self.answer2_entry.place(x=160, y=190, anchor="center")
+
+        self.answer3_entry = customtkinter.CTkEntry(tabView.tab("Questões"), width=240, height=40, fg_color="gray25", border_width=0)
+        self.answer3_entry.place(x=160, y=240, anchor="center")
+
+        self.answer4_entry = customtkinter.CTkEntry(tabView.tab("Questões"), width=240, height=40, fg_color="gray25", border_width=0)
+        self.answer4_entry.place(x=160, y=290, anchor="center")
+
+        answer_label = customtkinter.CTkLabel(tabView.tab("Questões"), text="Resposta:")
+        answer_label.place(x=445, y=10)
+        self.answer_option = customtkinter.CTkOptionMenu(tabView.tab("Questões"), values=["1", "2", "3", "4"], width=7, height=40, fg_color="gray25", button_color="gray25", hover=False)
+        self.answer_option.place(x=318, y=140, anchor="center")
 
         self.tree.bind("<ButtonRelease>", self.display_user)
         self.add_to_treeview()
