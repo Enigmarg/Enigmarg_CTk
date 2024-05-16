@@ -115,7 +115,8 @@ class Manager():
 
         # TreeView
         style = ttk.Style()
-        style.configure("Treeview", font=("Arial", 13, "normal"))
+        style.theme_use("clam")
+        style.configure("Treeview", font=("Arial", 13, "normal"), background="gray15", foreground="white", fieldbackground="gray15")
         style.map("Treeview", background=[("selected", "royal blue")])
         self.tree = ttk.Treeview(tabView.tab("Usuários"))
         self.tree["column"] = ("Email", "Cargo")
