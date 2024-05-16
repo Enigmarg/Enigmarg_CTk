@@ -10,7 +10,7 @@ class Login():
         self.width = 380
         self.height = 450
         self.screen = customtkinter.CTk()
-        self.screen.configure(fg_color="sky blue")
+        self.screen.configure(fg_color="cornflower blue")
         customtkinter.set_appearance_mode("light")
         self.screen.resizable(False, False)
 
@@ -43,7 +43,7 @@ class Login():
         login_btn = customtkinter.CTkButton(self.screen, width=200, height=30, text="Entrar", fg_color="royal blue", hover=False, command=self.check_user)
         login_btn.place(relx=0.5, rely=0.7, anchor="center")
 
-        forgot_password_btn = customtkinter.CTkButton(self.screen, width=0, height=0, text="Esqueceu a senha?", command=self.create_forgot_password_screen, text_color="royal blue", fg_color="transparent", hover=False, cursor="hand2")
+        forgot_password_btn = customtkinter.CTkButton(self.screen, width=0, height=0, text="Esqueceu a senha?", command=self.create_forgot_password_screen, text_color="white", fg_color="transparent", hover=False, cursor="hand2")
         forgot_password_btn.place(relx=0.5, rely=0.8, anchor="center")
 
         self.screen.mainloop()
@@ -62,7 +62,7 @@ class Login():
         send_btn = customtkinter.CTkButton(self.screen, width=200, height=30, text="Enviar", fg_color="royal blue", hover=False, command=None, cursor="hand2")
         send_btn.place(relx=0.5, rely=0.6, anchor="center")
 
-        return_btn = customtkinter.CTkButton(self.screen, width=0, height=0, text="Voltar", command=self.create_login_screen, text_color="royal blue", fg_color="transparent", hover=False, cursor="hand2")
+        return_btn = customtkinter.CTkButton(self.screen, width=0, height=0, text="Voltar", command=self.create_login_screen, text_color="white", fg_color="transparent", hover=False, cursor="hand2")
         return_btn.place(relx=0.5, rely=0.7, anchor="center")
 
         self.screen.mainloop()
