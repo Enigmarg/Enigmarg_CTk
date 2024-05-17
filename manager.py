@@ -172,8 +172,8 @@ class Manager():
         delete_btn = customtkinter.CTkButton(tabView.tab("Questões"), text="Deletar", width=170, height=40, corner_radius=50, font=BOLD_FONT, fg_color="royal blue", hover=False, command=self.delete_user,  cursor="hand2")
         delete_btn.place(relx=0.53, rely=0.47)
 
-        delete_btn = customtkinter.CTkButton(tabView.tab("Questões"), text="Limpar tudo", width=100, height=40, corner_radius=50, font=BOLD_FONT, text_color="royal blue", fg_color="transparent", border_width=1, border_color="royal blue", hover=False, command=self.delete_user,  cursor="hand2")
-        delete_btn.place(relx=0.82, rely=0.47)
+        clear_btn = customtkinter.CTkButton(tabView.tab("Questões"), text="Limpar tudo", width=100, height=40, corner_radius=50, font=BOLD_FONT, text_color="royal blue", fg_color="transparent", border_width=1, border_color="royal blue", hover=False, command=self.delete_user,  cursor="hand2")
+        clear_btn.place(relx=0.82, rely=0.47)
 
         self.tree.bind("<ButtonRelease>", self.display_user)
         self.add_to_treeview()
