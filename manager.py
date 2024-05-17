@@ -32,15 +32,9 @@ class Manager():
         for user in users:
             self.user_tree.insert("", "end", values=user)
 
-    def add_questions_to_treeview(self):
-        questions = database.get_all_questions()
-        self.question_tree.delete(*self.question_tree.get_children())
-        for question in questions:
-            self.question_tree.insert("", "end", values=question)
-
     def clear_user(self, *clicked):
         if clicked:
-            self.user_tree.selection_remove(self.tree.focus())
+            self.user_tree.selection_remove(self.user_tree.focus())
         self.email_entry.delete(0, "end")
         self.password_entry.delete(0, "end")
         self.role_option.set("Aluno")
@@ -83,6 +77,33 @@ class Manager():
             database.update_user(email, None, role)
             self.add_users_to_treeview()
             self.clear_user()
+
+    def add_questions_to_treeview(self):
+        questions = database.get_all_questions()
+        self.question_tree.delete(*self.question_tree.get_children())
+        for question in questions:
+            self.question_tree.insert("", "end", values=question)
+
+    def clear_question(self, *clicked):
+        if clicked:
+            self.question_tree.selection_remove(self.question_tree.focus())
+        self.question_text.delete(1.0, "end")
+        self.alter1_entry.delete(1.0, "end")
+        self.alter2_entry.delete(1.0, "end")
+        self.alter3_entry.delete(1.0, "end")
+        self.answer_entry.delete(1.0, "end")
+        self.difficulty_option.set("Fácil")
+
+    def display_question(self, event):
+        selected_items = self.question_tree.focus()
+        if selected_items:
+            row = self.question_tree.item(selected_items)["values"]
+            self.clear_question()
+            self.question_text.insert(1.0, row[0])
+            self.alter1_entry.insert(1.0, row[1])
+            self.alter2_entry.insert(1.0, row[2])
+            self.alter3_entry.insert(1.0, row[3])
+            self.answer_entry.insert(1.0, row[4])
 
     def create_manager_screen(self):
 
@@ -162,16 +183,16 @@ class Manager():
         self.difficulty_option = customtkinter.CTkOptionMenu(tabView.tab("Questões"), values=["Fácil", "Médio", "Difícil"], width=50, height=45, fg_color="gray25", button_color="gray25", hover=False)
         self.difficulty_option.place(relx=0.66, rely=0.1)
 
-        add_question_btn = customtkinter.CTkButton(tabView.tab("Questões"), text="Adicionar", width=165, height=35, corner_radius=50, font=BOLD_FONT, fg_color="royal blue", hover=False, command=self.add_user, cursor="hand2")
+        add_question_btn = customtkinter.CTkButton(tabView.tab("Questões"), text="Adicionar", width=165, height=35, corner_radius=50, font=BOLD_FONT, fg_color="royal blue", hover=False, command=None, cursor="hand2")
         add_question_btn.place(relx=0.15, rely=0.47)
 
-        update_question_btn = customtkinter.CTkButton(tabView.tab("Questões"), text="Atualizar", width=165, height=35, corner_radius=50, font=BOLD_FONT, fg_color="royal blue", hover=False, command=self.update_user,  cursor="hand2")
+        update_question_btn = customtkinter.CTkButton(tabView.tab("Questões"), text="Atualizar", width=165, height=35, corner_radius=50, font=BOLD_FONT, fg_color="royal blue", hover=False, command=None,  cursor="hand2")
         update_question_btn.place(relx=0.4, rely=0.47)
 
-        delete_question_btn = customtkinter.CTkButton(tabView.tab("Questões"), text="Deletar", width=165, height=35, corner_radius=50, font=BOLD_FONT, fg_color="royal blue", hover=False, command=self.delete_user,  cursor="hand2")
+        delete_question_btn = customtkinter.CTkButton(tabView.tab("Questões"), text="Deletar", width=165, height=35, corner_radius=50, font=BOLD_FONT, fg_color="royal blue", hover=False, command=None,  cursor="hand2")
         delete_question_btn.place(relx=0.65, rely=0.47)
 
-        clear_question_btn = customtkinter.CTkButton(tabView.tab("Questões"), text="Limpar", width=120, height=40, corner_radius=50, font=BOLD_FONT, text_color="royal blue", fg_color="transparent", border_width=1, border_color="royal blue", hover=False, command=self.delete_user,  cursor="hand2")
+        clear_question_btn = customtkinter.CTkButton(tabView.tab("Questões"), text="Limpar", width=120, height=40, corner_radius=50, font=BOLD_FONT, text_color="royal blue", fg_color="transparent", border_width=1, border_color="royal blue", hover=False, command=self.clear_question,cursor="hand2")
         clear_question_btn.place(relx=0.8, rely=0.1)
 
         # TreeView
@@ -199,7 +220,7 @@ class Manager():
 
 
         self.user_tree.bind("<ButtonRelease>", self.display_user)
-        # self.question_tree.bind("<ButtonRelease>", self.display_user)
+        self.question_tree.bind("<ButtonRelease>", self.display_question)
         self.add_users_to_treeview()
         self.add_questions_to_treeview()
         self.screen.mainloop()
