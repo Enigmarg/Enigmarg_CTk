@@ -68,3 +68,17 @@ class Database():
         sql = ("DELETE FROM tb_user WHERE user_email = '%s'" % email)
         self.cursor.execute(sql)
         self.cnx.commit()
+
+    def get_all_questions(self):
+        sql = ("""
+            SELECT q.question_text AS pergunta,
+                (SELECT answer_text FROM tb_answer WHERE question_id = q.question_id AND is_true = FALSE ORDER BY RAND() LIMIT 1) AS alternativa,
+                (SELECT answer_text FROM tb_answer WHERE question_id = q.question_id AND is_true = FALSE ORDER BY RAND() LIMIT 1) AS alternativa,
+                (SELECT answer_text FROM tb_answer WHERE question_id = q.question_id AND is_true = FALSE ORDER BY RAND() LIMIT 1) AS alternativa,
+                (SELECT answer_text FROM tb_answer WHERE question_id = q.question_id AND is_true = TRUE LIMIT 1) AS resposta
+            FROM tb_question q;
+        """)
+        self.cursor.execute(sql)
+        self.cnx.commit()
+        questions = self.cursor.fetchall()
+        return questions

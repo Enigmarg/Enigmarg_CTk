@@ -26,11 +26,17 @@ class Manager():
 
         self.screen.geometry("%dx%d+%d+%d" % (self.width, self.height, x, y))
 
-    def add_to_treeview(self):
+    def add_users_to_treeview(self):
         users = database.get_all_users()
         self.tree.delete(*self.tree.get_children())
         for user in users:
             self.tree.insert("", "end", values=user)
+
+    def add_questions_to_treeview(self):
+        questions = database.get_all_questions()
+        self.question_tree.delete(*self.question_tree.get_children())
+        for question in questions:
+            self.question_tree.insert("", "end", values=question)
 
     def clear(self, *clicked):
         if clicked:
@@ -58,13 +64,13 @@ class Manager():
             messagebox.showerror("Erro", "Preencha todos os campos.")
         else:
             database.add_user(email, password, role)
-            self.add_to_treeview()
+            self.add_users_to_treeview()
             self.clear()
 
     def delete_user(self):
         email = self.get_email()
         database.delete_user(email)
-        self.add_to_treeview()
+        self.add_users_to_treeview()
         self.clear()
 
     def update_user(self):
@@ -73,11 +79,11 @@ class Manager():
         role = self.get_role()
         if (email and password and role):
             database.update_user(email, password, role)
-            self.add_to_treeview()
+            self.add_users_to_treeview()
             self.clear()
         elif (email and role):
             database.update_user(email, None, role)
-            self.add_to_treeview()
+            self.add_users_to_treeview()
             self.clear()
 
     def create_manager_screen(self):
@@ -130,6 +136,7 @@ class Manager():
 
         self.tree.place(relx=0.53, rely=0.07, relwidth=0.45, relheight=0.79)
 
+        # Entrys
         question_label = customtkinter.CTkLabel(tabView.tab("Questões"), text="Pergunta:")
         question_label.place(relx=0.02, rely=0.02)
         self.question_text = customtkinter.CTkTextbox(tabView.tab("Questões"), width=250, height=150, fg_color="gray25")
@@ -175,8 +182,33 @@ class Manager():
         clear_btn = customtkinter.CTkButton(tabView.tab("Questões"), text="Limpar", width=100, height=40, corner_radius=50, font=BOLD_FONT, text_color="royal blue", fg_color="transparent", border_width=1, border_color="royal blue", hover=False, command=self.delete_user,  cursor="hand2")
         clear_btn.place(relx=0.8, rely=0.47)
 
-        self.tree.bind("<ButtonRelease>", self.display_user)
-        self.add_to_treeview()
+        # TreeView
+        style = ttk.Style()
+        style.theme_use("clam")
+        style.configure("Treeview", font=("Arial", 13, "normal"), background="gray15", foreground="white", fieldbackground="gray15")
+        style.map("Treeview", background=[("selected", "royal blue")])
+        self.question_tree = ttk.Treeview(tabView.tab("Questões"))
+        self.question_tree["column"] = ("Pergunta", "Alternativa1", "Alternativa2", "Alternativa3", "Resposta")
+
+        self.question_tree.column("#0", width=0, stretch=tk.NO)
+        self.question_tree.column("Pergunta", anchor=tk.CENTER, width=60)
+        self.question_tree.column("Alternativa1", anchor=tk.CENTER, width=60)
+        self.question_tree.column("Alternativa2", anchor=tk.CENTER, width=60)
+        self.question_tree.column("Alternativa3", anchor=tk.CENTER, width=60)
+        self.question_tree.column("Resposta", anchor=tk.CENTER, width=60)
+
+        self.question_tree.heading("Pergunta", text="Pergunta")
+        self.question_tree.heading("Alternativa1", text="Alternativa")
+        self.question_tree.heading("Alternativa2", text="Alternativa")
+        self.question_tree.heading("Alternativa3", text="Alternativa")
+        self.question_tree.heading("Resposta", text="Resposta")
+
+        self.question_tree.place(relx=0, rely=0.6, relwidth=1, relheight=0.4)
+
+
+        self.question_tree.bind("<ButtonRelease>", self.display_user)
+        self.add_users_to_treeview()
+        self.add_questions_to_treeview()
         self.screen.mainloop()
 
     def get_email(self):
