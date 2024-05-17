@@ -138,49 +138,43 @@ class Manager():
 
         # Entrys
         question_label = customtkinter.CTkLabel(tabView.tab("Questões"), text="Pergunta:")
-        question_label.place(relx=0.02, rely=0.02)
+        question_label.place(relx=0.02, rely=0.03)
         self.question_text = customtkinter.CTkTextbox(tabView.tab("Questões"), width=250, height=150, fg_color="gray25")
         self.question_text.place(relx=0.02, rely=0.1)
 
         answer_label = customtkinter.CTkLabel(tabView.tab("Questões"), text="Alternativas:")
-        answer_label.place(relx=0.38, rely=0.02)
+        answer_label.place(relx=0.35, rely=0.03)
 
-        answer1_label = customtkinter.CTkLabel(tabView.tab("Questões"), text="1.")
-        answer1_label.place(relx=0.38, rely=0.14)
-        self.answer1_entry = customtkinter.CTkTextbox(tabView.tab("Questões"), width=140, height=65, fg_color="gray25", border_width=0)
-        self.answer1_entry.place(relx=0.4, rely=0.1)
+        self.alter1_entry = customtkinter.CTkTextbox(tabView.tab("Questões"), width=230, height=45, fg_color="gray25", border_width=0)
+        self.alter1_entry.place(relx=0.35, rely=0.1)
 
-        answer2_label = customtkinter.CTkLabel(tabView.tab("Questões"), text="2.")
-        answer2_label.place(relx=0.62, rely=0.14)
-        self.answer2_entry = customtkinter.CTkTextbox(tabView.tab("Questões"), width=140, height=65, fg_color="gray25", border_width=0)
-        self.answer2_entry.place(relx=0.64, rely=0.1)
+        self.alter2_entry = customtkinter.CTkTextbox(tabView.tab("Questões"), width=230, height=45, fg_color="gray25", border_width=0)
+        self.alter2_entry.place(relx=0.35, rely=0.217)
 
-        answer3_label = customtkinter.CTkLabel(tabView.tab("Questões"), text="3.")
-        answer3_label.place(relx=0.38, rely=0.33)
-        self.answer3_entry = customtkinter.CTkTextbox(tabView.tab("Questões"), width=140, height=65, fg_color="gray25", border_width=0)
-        self.answer3_entry.place(relx=0.4, rely=0.29)
-
-        answer4_label = customtkinter.CTkLabel(tabView.tab("Questões"), text="4.")
-        answer4_label.place(relx=0.62, rely=0.33)
-        self.answer4_entry = customtkinter.CTkTextbox(tabView.tab("Questões"), width=140, height=65, fg_color="gray25", border_width=0)
-        self.answer4_entry.place(relx=0.64, rely=0.29)
+        self.alter3_entry = customtkinter.CTkTextbox(tabView.tab("Questões"), width=230, height=45, fg_color="gray25", border_width=0)
+        self.alter3_entry.place(relx=0.35, rely=0.335)
 
         answer_label = customtkinter.CTkLabel(tabView.tab("Questões"), text="Resposta:")
-        answer_label.place(relx=0.85, rely=0.02)
-        self.answer_option = customtkinter.CTkOptionMenu(tabView.tab("Questões"), values=["1", "2", "3", "4"], width=5, height=40, fg_color="gray25", button_color="gray25", hover=False)
-        self.answer_option.place(relx=0.85, rely=0.1)
+        answer_label.place(relx=0.66, rely=0.265)
+        self.answer_entry = customtkinter.CTkTextbox(tabView.tab("Questões"), width=230, height=45, fg_color="gray25", border_width=0)
+        self.answer_entry.place(relx=0.66, rely=0.335)
 
-        add_btn = customtkinter.CTkButton(tabView.tab("Questões"), text="Adicionar", width=170, height=40, corner_radius=50, font=BOLD_FONT, fg_color="royal blue", hover=False, command=self.add_user, cursor="hand2")
-        add_btn.place(relx=0.05, rely=0.47)
+        difficulty_label = customtkinter.CTkLabel(tabView.tab("Questões"), text="Dificuldade:")
+        difficulty_label.place(relx=0.66, rely=0.03)
+        self.difficulty_option = customtkinter.CTkOptionMenu(tabView.tab("Questões"), values=["Fácil", "Médio", "Difícil"], width=50, height=45, fg_color="gray25", button_color="gray25", hover=False)
+        self.difficulty_option.place(relx=0.66, rely=0.1)
 
-        update_btn = customtkinter.CTkButton(tabView.tab("Questões"), text="Atualizar", width=170, height=40, corner_radius=50, font=BOLD_FONT, fg_color="royal blue", hover=False, command=self.update_user,  cursor="hand2")
-        update_btn.place(relx=0.3, rely=0.47)
+        add_btn = customtkinter.CTkButton(tabView.tab("Questões"), text="Adicionar", width=165, height=35, corner_radius=50, font=BOLD_FONT, fg_color="royal blue", hover=False, command=self.add_user, cursor="hand2")
+        add_btn.place(relx=0.15, rely=0.47)
 
-        delete_btn = customtkinter.CTkButton(tabView.tab("Questões"), text="Deletar", width=170, height=40, corner_radius=50, font=BOLD_FONT, fg_color="royal blue", hover=False, command=self.delete_user,  cursor="hand2")
-        delete_btn.place(relx=0.55, rely=0.47)
+        update_btn = customtkinter.CTkButton(tabView.tab("Questões"), text="Atualizar", width=165, height=35, corner_radius=50, font=BOLD_FONT, fg_color="royal blue", hover=False, command=self.update_user,  cursor="hand2")
+        update_btn.place(relx=0.4, rely=0.47)
 
-        clear_btn = customtkinter.CTkButton(tabView.tab("Questões"), text="Limpar", width=100, height=40, corner_radius=50, font=BOLD_FONT, text_color="royal blue", fg_color="transparent", border_width=1, border_color="royal blue", hover=False, command=self.delete_user,  cursor="hand2")
-        clear_btn.place(relx=0.8, rely=0.47)
+        delete_btn = customtkinter.CTkButton(tabView.tab("Questões"), text="Deletar", width=165, height=35, corner_radius=50, font=BOLD_FONT, fg_color="royal blue", hover=False, command=self.delete_user,  cursor="hand2")
+        delete_btn.place(relx=0.65, rely=0.47)
+
+        clear_btn = customtkinter.CTkButton(tabView.tab("Questões"), text="Limpar", width=120, height=40, corner_radius=50, font=BOLD_FONT, text_color="royal blue", fg_color="transparent", border_width=1, border_color="royal blue", hover=False, command=self.delete_user,  cursor="hand2")
+        clear_btn.place(relx=0.8, rely=0.1)
 
         # TreeView
         style = ttk.Style()
