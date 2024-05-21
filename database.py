@@ -69,14 +69,15 @@ class Database():
         self.cursor.execute(sql)
         self.cnx.commit()
 
-    def get_all_questions(self):
+    def get_all_questions_json(self):
         sql = ("""
-            SELECT q.question_text AS pergunta,
-                (SELECT answer_text FROM tb_answer WHERE question_id = q.question_id AND is_true = FALSE ORDER BY RAND() LIMIT 1) AS alternativa,
-                (SELECT answer_text FROM tb_answer WHERE question_id = q.question_id AND is_true = FALSE ORDER BY RAND() LIMIT 1) AS alternativa,
-                (SELECT answer_text FROM tb_answer WHERE question_id = q.question_id AND is_true = FALSE ORDER BY RAND() LIMIT 1) AS alternativa,
-                (SELECT answer_text FROM tb_answer WHERE question_id = q.question_id AND is_true = TRUE LIMIT 1) AS resposta
-            FROM tb_question q;
+            SELECT JSON_OBJECT(
+                'question', tb_question.question_text,
+                'answers', JSON_ARRAYAGG(JSON_OBJECT('text', tb_answer.answer_text, 'is_true', tb_answer.is_true))
+            ) AS questions
+            FROM tb_question
+            JOIN tb_answer ON tb_question.question_id = tb_answer.question_id
+            GROUP BY tb_question.question_id
         """)
         self.cursor.execute(sql)
         self.cnx.commit()
