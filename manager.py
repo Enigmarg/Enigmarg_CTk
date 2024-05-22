@@ -143,14 +143,17 @@ class Manager():
         self.role_option = customtkinter.CTkOptionMenu(tabView.tab("Usuários"), values=["Aluno", "Professor"], width=300, height=40, fg_color="gray25", button_color="gray25", hover=False)
         self.role_option.place(x=190, y=260, anchor="center")
 
-        add_user_btn = customtkinter.CTkButton(tabView.tab("Usuários"), text="Adicionar", width=90, height=40, corner_radius=50, font=BOLD_FONT, text_color="royal blue", fg_color="transparent", border_width=1, border_color="royal blue", hover=False, command=self.add_user, cursor="hand2")
+        add_user_btn = customtkinter.CTkButton(tabView.tab("Usuários"), text="Adicionar", width=90, height=40, corner_radius=50, font=BOLD_FONT, fg_color="royal blue", hover=False, command=self.add_user, cursor="hand2")
         add_user_btn.place(x=90, y=370, anchor="center")
 
-        update_user_btn = customtkinter.CTkButton(tabView.tab("Usuários"), text="Atualizar", width=90, height=40, corner_radius=50, font=BOLD_FONT, text_color="royal blue", fg_color="transparent", border_width=1, border_color="royal blue", hover=False, command=self.update_user,  cursor="hand2")
+        update_user_btn = customtkinter.CTkButton(tabView.tab("Usuários"), text="Atualizar", width=90, height=40, corner_radius=50, font=BOLD_FONT, fg_color="royal blue", hover=False, command=self.update_user, cursor="hand2")
         update_user_btn.place(x=192, y=370, anchor="center")
 
         delete_user_btn = customtkinter.CTkButton(tabView.tab("Usuários"), text="Deletar", width=90, height=40, corner_radius=50, font=BOLD_FONT, fg_color="royal blue", hover=False, command=self.delete_user,  cursor="hand2")
         delete_user_btn.place(x=290, y=370, anchor="center")
+
+        clear_user_btn = customtkinter.CTkButton(tabView.tab("Usuários"), text="Limpar", width=300, height=40, corner_radius=50, font=BOLD_FONT, text_color="royal blue", fg_color="transparent", border_width=1, border_color="royal blue", hover=False, command=self.clear_user, cursor="hand2")
+        clear_user_btn.place(relx=0.05, rely=0.89)
 
         # TreeView
         style = ttk.Style()
