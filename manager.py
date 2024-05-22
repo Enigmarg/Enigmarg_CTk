@@ -105,6 +105,19 @@ class Manager():
     #         self.alter3_entry.insert(1.0, row[3])
     #         self.answer_entry.insert(1.0, row[4])
 
+    def add_question(self):
+        alter1 = self.get_altenatives()[0]
+        difficulty = self.get_question()[1]
+        question = self.get_question()[0]
+        alter2 = self.get_altenatives()[1]
+        alter3 = self.get_altenatives()[2]
+        answer = self.get_altenatives()[3]
+        if not (question and difficulty and alter1 and alter2 and alter3 and answer):
+            messagebox.showerror("Erro", "Preencha todos os campos!")
+        else:
+            database.add_question(question, difficulty, alter1, alter2, alter3, answer)
+            print("questão adicionada!")
+
     def create_manager_screen(self):
 
         # TabView
@@ -183,7 +196,7 @@ class Manager():
         self.difficulty_option = customtkinter.CTkOptionMenu(tabView.tab("Questões"), values=["Fácil", "Médio", "Difícil"], width=50, height=45, fg_color="gray25", button_color="gray25", hover=False)
         self.difficulty_option.place(relx=0.66, rely=0.1)
 
-        add_question_btn = customtkinter.CTkButton(tabView.tab("Questões"), text="Adicionar", width=165, height=35, corner_radius=50, font=BOLD_FONT, fg_color="royal blue", hover=False, command=None, cursor="hand2")
+        add_question_btn = customtkinter.CTkButton(tabView.tab("Questões"), text="Adicionar", width=165, height=35, corner_radius=50, font=BOLD_FONT, fg_color="royal blue", hover=False, command=self.add_question, cursor="hand2")
         add_question_btn.place(relx=0.15, rely=0.47)
 
         update_question_btn = customtkinter.CTkButton(tabView.tab("Questões"), text="Atualizar", width=165, height=35, corner_radius=50, font=BOLD_FONT, fg_color="royal blue", hover=False, command=None,  cursor="hand2")
@@ -240,6 +253,25 @@ class Manager():
         role = self.role_option.get()   
         return role
     
+    def get_question(self):
+        question = self.question_text.get("1.0", "end-1c").strip()
+        difficulty = self.difficulty_option.get().strip()
+        if question and difficulty:
+            return question, difficulty
+        else:
+            return None, None
+        
+    def get_altenatives(self):
+        alter1 = self.alter1_entry.get("1.0", "end-1c").strip()
+        alter2 = self.alter2_entry.get("1.0", "end-1c").strip()
+        alter3 = self.alter3_entry.get("1.0", "end-1c").strip()
+        answer = self.answer_entry.get("1.0", "end-1c").strip()
+        
+        if alter1 and alter2 and alter3 and answer:
+            return alter1, alter2, alter3, answer
+        else:
+            return None, None, None, None
+
 if __name__ == "__main__":
     database = Database()
     database.connect()

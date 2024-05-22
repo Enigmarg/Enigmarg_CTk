@@ -83,3 +83,10 @@ class Database():
         self.cnx.commit()
         questions = self.cursor.fetchall()
         return questions
+    
+    def add_question(self, question, difficulty, alter1, alter2, alter3, answer):
+        self.cursor.execute("INSERT INTO tb_question (question_text, difficulty_id) SELECT '%s', difficulty_id FROM tb_difficulty WHERE difficulty_level='%s'" % (question, difficulty))
+        question_id = self.cursor.lastrowid
+        self.cursor.executemany("INSERT INTO tb_answer (answer_text, is_true, question_id) VALUES (%s, %s, %s)", [(alter1, 0, question_id), (alter2, 0, question_id), (alter3, 0, question_id), (answer, 1, question_id)])
+        self.cnx.commit()
+        print("Questão adicionada!")
