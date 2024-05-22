@@ -106,12 +106,12 @@ class Manager():
     #         self.answer_entry.insert(1.0, row[4])
 
     def add_question(self):
-        alter1 = self.get_altenatives()[0]
-        difficulty = self.get_question()[1]
-        question = self.get_question()[0]
-        alter2 = self.get_altenatives()[1]
-        alter3 = self.get_altenatives()[2]
-        answer = self.get_altenatives()[3]
+        question = self.get_altenatives()[0]
+        difficulty = self.get_altenatives()[1]
+        alter1 = self.get_altenatives()[2]
+        alter2 = self.get_altenatives()[3]
+        alter3 = self.get_altenatives()[4]
+        answer = self.get_altenatives()[5]
         if not (question and difficulty and alter1 and alter2 and alter3 and answer):
             messagebox.showerror("Erro", "Preencha todos os campos!")
         else:
@@ -253,24 +253,18 @@ class Manager():
         role = self.role_option.get()   
         return role
     
-    def get_question(self):
+    def get_altenatives(self):
         question = self.question_text.get("1.0", "end-1c").strip()
         difficulty = self.difficulty_option.get().strip()
-        if question and difficulty:
-            return question, difficulty
-        else:
-            return None, None
-        
-    def get_altenatives(self):
         alter1 = self.alter1_entry.get("1.0", "end-1c").strip()
         alter2 = self.alter2_entry.get("1.0", "end-1c").strip()
         alter3 = self.alter3_entry.get("1.0", "end-1c").strip()
         answer = self.answer_entry.get("1.0", "end-1c").strip()
         
-        if alter1 and alter2 and alter3 and answer:
-            return alter1, alter2, alter3, answer
+        if question and difficulty and alter1 and alter2 and alter3 and answer:
+            return question, difficulty, alter1, alter2, alter3, answer
         else:
-            return None, None, None, None
+            return None, None, None, None, None, None
 
 if __name__ == "__main__":
     database = Database()
