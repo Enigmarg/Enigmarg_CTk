@@ -84,26 +84,26 @@ class Manager():
     #     for question in questions:
     #         self.question_tree.insert("", "end", values=question)
 
-    # def clear_question(self, *clicked):
-    #     if clicked:
-    #         self.question_tree.selection_remove(self.question_tree.focus())
-    #     self.question_text.delete(1.0, "end")
-    #     self.alter1_entry.delete(1.0, "end")
-    #     self.alter2_entry.delete(1.0, "end")
-    #     self.alter3_entry.delete(1.0, "end")
-    #     self.answer_entry.delete(1.0, "end")
-    #     self.difficulty_option.set("Fácil")
+    def clear_question(self, *clicked):
+        if clicked:
+            self.question_tree.selection_remove(self.question_tree.focus())
+        self.question_text.delete("1.0", "end")
+        self.difficulty_option.set("Fácil")
+        self.alter1_entry.delete("1.0", "end")
+        self.alter2_entry.delete("1.0", "end")
+        self.alter3_entry.delete("1.0", "end")
+        self.answer_entry.delete("1.0", "end")
 
     # def display_question(self, event):
     #     selected_items = self.question_tree.focus()
     #     if selected_items:
     #         row = self.question_tree.item(selected_items)["values"]
     #         self.clear_question()
-    #         self.question_text.insert(1.0, row[0])
-    #         self.alter1_entry.insert(1.0, row[1])
-    #         self.alter2_entry.insert(1.0, row[2])
-    #         self.alter3_entry.insert(1.0, row[3])
-    #         self.answer_entry.insert(1.0, row[4])
+    #         self.question_text.insert("1.0", row[0])
+    #         self.alter1_entry.insert("1.0", row[1])
+    #         self.alter2_entry.insert("1.0", row[2])
+    #         self.alter3_entry.insert("1.0", row[3])
+    #         self.answer_entry.insert("1.0", row[4])
 
     def add_question(self):
         question = self.get_altenatives()[0]
@@ -116,7 +116,8 @@ class Manager():
             messagebox.showerror("Erro", "Preencha todos os campos!")
         else:
             database.add_question(question, difficulty, alter1, alter2, alter3, answer)
-            print("questão adicionada!")
+            self.clear_question()
+            print("Questão adicionada!")
 
     def create_manager_screen(self):
 
@@ -205,7 +206,7 @@ class Manager():
         delete_question_btn = customtkinter.CTkButton(tabView.tab("Questões"), text="Deletar", width=165, height=35, corner_radius=50, font=BOLD_FONT, fg_color="royal blue", hover=False, command=None,  cursor="hand2")
         delete_question_btn.place(relx=0.65, rely=0.47)
 
-        clear_question_btn = customtkinter.CTkButton(tabView.tab("Questões"), text="Limpar", width=120, height=40, corner_radius=50, font=BOLD_FONT, text_color="royal blue", fg_color="transparent", border_width=1, border_color="royal blue", hover=False, command=None,cursor="hand2")
+        clear_question_btn = customtkinter.CTkButton(tabView.tab("Questões"), text="Limpar", width=120, height=40, corner_radius=50, font=BOLD_FONT, text_color="royal blue", fg_color="transparent", border_width=1, border_color="royal blue", hover=False, command=self.clear_question, cursor="hand2")
         clear_question_btn.place(relx=0.8, rely=0.1)
 
         # TreeView
