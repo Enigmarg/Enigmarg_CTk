@@ -88,7 +88,6 @@ class Manager():
         if clicked:
             self.question_tree.selection_remove(self.question_tree.focus())
         self.question_text.delete("1.0", "end")
-        self.difficulty_option.set("Fácil")
         self.alter1_entry.delete("1.0", "end")
         self.alter2_entry.delete("1.0", "end")
         self.alter3_entry.delete("1.0", "end")
@@ -107,15 +106,14 @@ class Manager():
 
     def add_question(self):
         question = self.get_altenatives()[0]
-        difficulty = self.get_altenatives()[1]
-        alter1 = self.get_altenatives()[2]
-        alter2 = self.get_altenatives()[3]
-        alter3 = self.get_altenatives()[4]
-        answer = self.get_altenatives()[5]
-        if not (question and difficulty and alter1 and alter2 and alter3 and answer):
+        alter1 = self.get_altenatives()[1]
+        alter2 = self.get_altenatives()[2]
+        alter3 = self.get_altenatives()[3]
+        answer = self.get_altenatives()[4]
+        if not (question and alter1 and alter2 and alter3 and answer):
             messagebox.showerror("Erro", "Preencha todos os campos!")
         else:
-            database.add_question(question, difficulty, alter1, alter2, alter3, answer)
+            database.add_question(question, alter1, alter2, alter3, answer)
             self.clear_question()
             print("Questão adicionada!")
 
@@ -195,11 +193,6 @@ class Manager():
         self.answer_entry = customtkinter.CTkTextbox(tabView.tab("Questões"), width=230, height=45, fg_color="gray25", border_width=0)
         self.answer_entry.place(relx=0.66, rely=0.335)
 
-        difficulty_label = customtkinter.CTkLabel(tabView.tab("Questões"), text="Dificuldade:")
-        difficulty_label.place(relx=0.66, rely=0.03)
-        self.difficulty_option = customtkinter.CTkOptionMenu(tabView.tab("Questões"), values=["Fácil", "Médio", "Difícil"], width=50, height=45, fg_color="gray25", button_color="gray25", hover=False)
-        self.difficulty_option.place(relx=0.66, rely=0.1)
-
         add_question_btn = customtkinter.CTkButton(tabView.tab("Questões"), text="Adicionar", width=165, height=35, corner_radius=50, font=BOLD_FONT, fg_color="royal blue", hover=False, command=self.add_question, cursor="hand2")
         add_question_btn.place(relx=0.15, rely=0.47)
 
@@ -259,14 +252,13 @@ class Manager():
     
     def get_altenatives(self):
         question = self.question_text.get("1.0", "end-1c").strip()
-        difficulty = self.difficulty_option.get().strip()
         alter1 = self.alter1_entry.get("1.0", "end-1c").strip()
         alter2 = self.alter2_entry.get("1.0", "end-1c").strip()
         alter3 = self.alter3_entry.get("1.0", "end-1c").strip()
         answer = self.answer_entry.get("1.0", "end-1c").strip()
         
-        if question and difficulty and alter1 and alter2 and alter3 and answer:
-            return question, difficulty, alter1, alter2, alter3, answer
+        if question and alter1 and alter2 and alter3 and answer:
+            return question, alter1, alter2, alter3, answer
         else:
             return None, None, None, None, None, None
 
