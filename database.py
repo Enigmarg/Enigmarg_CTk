@@ -47,6 +47,7 @@ class Database():
         sql = ("SELECT tb_user.user_email, role_name FROM tb_role INNER JOIN tb_user ON tb_user.role_id = tb_role.role_id WHERE role_name != 'Admin'")
         self.cursor.execute(sql)
         users = self.cursor.fetchall()
+        self.cnx.commit()
         return users
         
     def add_user(self, email, password, role):
@@ -90,3 +91,17 @@ class Database():
         self.cursor.executemany("INSERT INTO tb_answer (answer_text, is_true, question_id) VALUES (%s, %s, %s)", [(alter1, 0, question_id), (alter2, 0, question_id), (alter3, 0, question_id), (answer, 1, question_id)])
         self.cnx.commit()
         print("Questão adicionada!")
+
+    def get_all_questions(self):
+        sql = ("""
+            SELECT q.question_id, q.question_text AS pergunta,
+                (SELECT answer_text FROM tb_answer WHERE question_id = q.question_id AND is_true = FALSE ORDER BY answer_id LIMIT 0, 1) AS alternativa,
+                (SELECT answer_text FROM tb_answer WHERE question_id = q.question_id AND is_true = FALSE ORDER BY answer_id LIMIT 1, 1) AS alternativa,
+                (SELECT answer_text FROM tb_answer WHERE question_id = q.question_id AND is_true = FALSE ORDER BY answer_id LIMIT 2, 1) AS alternativa,
+                (SELECT answer_text FROM tb_answer WHERE question_id = q.question_id AND is_true = TRUE LIMIT 4) AS resposta
+            FROM tb_question q
+        """)
+        self.cursor.execute(sql)
+        questions = self.cursor.fetchall()
+        self.cnx.commit()
+        return questions

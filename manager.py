@@ -78,11 +78,11 @@ class Manager():
             self.add_users_to_treeview()
             self.clear_user()
 
-    # def add_questions_to_treeview(self):
-    #     questions = database.get_all_questions()
-    #     self.question_tree.delete(*self.question_tree.get_children())
-    #     for question in questions:
-    #         self.question_tree.insert("", "end", values=question)
+    def add_questions_to_treeview(self):
+        questions = database.get_all_questions()
+        self.question_tree.delete(*self.question_tree.get_children())
+        for question in questions:
+            self.question_tree.insert("", "end", values=(question[1], question[2], question[3], question[4], question[5]))
 
     def clear_question(self, *clicked):
         if clicked:
@@ -214,12 +214,13 @@ class Manager():
         self.question_tree["column"] = ("Pergunta", "Alternativa1", "Alternativa2", "Alternativa3", "Resposta")
 
         self.question_tree.column("#0", width=0, stretch=tk.NO)
-        self.question_tree.column("Pergunta", anchor=tk.CENTER, width=60)
-        self.question_tree.column("Alternativa1", anchor=tk.CENTER, width=60)
-        self.question_tree.column("Alternativa2", anchor=tk.CENTER, width=60)
-        self.question_tree.column("Alternativa3", anchor=tk.CENTER, width=60)
-        self.question_tree.column("Resposta", anchor=tk.CENTER, width=60)
+        self.question_tree.column("Pergunta", anchor=tk.CENTER, width=120)
+        self.question_tree.column("Alternativa1", anchor=tk.CENTER, width=120)
+        self.question_tree.column("Alternativa2", anchor=tk.CENTER, width=120)
+        self.question_tree.column("Alternativa3", anchor=tk.CENTER, width=120)
+        self.question_tree.column("Resposta", anchor=tk.CENTER, width=120)
 
+        self.question_tree.heading("#0", text="Id")
         self.question_tree.heading("Pergunta", text="Pergunta")
         self.question_tree.heading("Alternativa1", text="Alternativa")
         self.question_tree.heading("Alternativa2", text="Alternativa")
@@ -232,7 +233,7 @@ class Manager():
         self.user_tree.bind("<ButtonRelease>", self.display_user)
         # self.question_tree.bind("<ButtonRelease>", self.display_question)
         self.add_users_to_treeview()
-        # self.add_questions_to_treeview()
+        self.add_questions_to_treeview()
         self.screen.mainloop()
 
     def get_email(self):
