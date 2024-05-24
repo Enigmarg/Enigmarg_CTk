@@ -93,16 +93,16 @@ class Manager():
         self.alter3_entry.delete("1.0", "end")
         self.answer_entry.delete("1.0", "end")
 
-    # def display_question(self, event):
-    #     selected_items = self.question_tree.focus()
-    #     if selected_items:
-    #         row = self.question_tree.item(selected_items)["values"]
-    #         self.clear_question()
-    #         self.question_text.insert("1.0", row[0])
-    #         self.alter1_entry.insert("1.0", row[1])
-    #         self.alter2_entry.insert("1.0", row[2])
-    #         self.alter3_entry.insert("1.0", row[3])
-    #         self.answer_entry.insert("1.0", row[4])
+    def display_question(self, event):
+        selected_items = self.question_tree.focus()
+        if selected_items:
+            row = self.question_tree.item(selected_items)["values"]
+            self.clear_question()
+            self.question_text.insert("1.0", row[0])
+            self.alter1_entry.insert("1.0", row[1])
+            self.alter2_entry.insert("1.0", row[2])
+            self.alter3_entry.insert("1.0", row[3])
+            self.answer_entry.insert("1.0", row[4])
 
     def add_question(self):
         question = self.get_altenatives()[0]
@@ -114,8 +114,8 @@ class Manager():
             messagebox.showerror("Erro", "Preencha todos os campos!")
         else:
             database.add_question(question, alter1, alter2, alter3, answer)
+            self.add_questions_to_treeview()
             self.clear_question()
-            print("Questão adicionada!")
 
     def create_manager_screen(self):
 
@@ -231,7 +231,7 @@ class Manager():
 
 
         self.user_tree.bind("<ButtonRelease>", self.display_user)
-        # self.question_tree.bind("<ButtonRelease>", self.display_question)
+        self.question_tree.bind("<ButtonRelease>", self.display_question)
         self.add_users_to_treeview()
         self.add_questions_to_treeview()
         self.screen.mainloop()
