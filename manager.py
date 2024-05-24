@@ -35,8 +35,8 @@ class Manager():
     def clear_user(self, *clicked):
         if clicked:
             self.user_tree.selection_remove(self.user_tree.focus())
-        self.email_entry.delete(0, "end")
-        self.password_entry.delete(0, "end")
+        self.email_entry.delete("0", "end")
+        self.password_entry.delete("0", "end")
         self.role_option.set("Aluno")
 
     def display_user(self, event):
@@ -44,7 +44,7 @@ class Manager():
         if selected_items:
             row = self.user_tree.item(selected_items)["values"]
             self.clear_user()
-            self.email_entry.insert(0, row[0])
+            self.email_entry.insert("0", row[0])
             self.role_option.set(row[1])
 
     def add_user(self):
@@ -87,6 +87,7 @@ class Manager():
     def clear_question(self, *clicked):
         if clicked:
             self.question_tree.selection_remove(self.question_tree.focus())
+        self.question_id_entry.delete("0", "end")
         self.question_text.delete("1.0", "end")
         self.alter1_entry.delete("1.0", "end")
         self.alter2_entry.delete("1.0", "end")
@@ -98,11 +99,12 @@ class Manager():
         if selected_items:
             row = self.question_tree.item(selected_items)["values"]
             self.clear_question()
-            self.question_text.insert("1.0", row[0])
-            self.alter1_entry.insert("1.0", row[1])
-            self.alter2_entry.insert("1.0", row[2])
-            self.alter3_entry.insert("1.0", row[3])
-            self.answer_entry.insert("1.0", row[4])
+            self.question_id_entry.insert("0", row[0])
+            self.question_text.insert("1.0", row[1])
+            self.alter1_entry.insert("1.0", row[2])
+            self.alter2_entry.insert("1.0", row[3])
+            self.alter3_entry.insert("1.0", row[4])
+            self.answer_entry.insert("1.0", row[5])
 
     def add_question(self):
         question = self.get_altenatives()[0]
@@ -171,9 +173,9 @@ class Manager():
         self.user_tree.place(relx=0.53, rely=0.07, relwidth=0.45, relheight=0.79)
 
         # Entrys
-        question_id_label = customtkinter.CTkLabel(tabView.tab("Questões"), text="Id")
+        question_id_label = customtkinter.CTkLabel(tabView.tab("Questões"), text="Id:")
         question_id_label.place(relx=0.66, rely=0.03)
-        self.question_id_entry = customtkinter.CTkTextbox(tabView.tab("Questões"), width=105, height=40, fg_color="gray25")
+        self.question_id_entry = customtkinter.CTkEntry(tabView.tab("Questões"), width=105, height=45, fg_color="gray25", border_width=0)
         self.question_id_entry.place(relx=0.66, rely=0.1)
 
         question_label = customtkinter.CTkLabel(tabView.tab("Questões"), text="Pergunta:")
