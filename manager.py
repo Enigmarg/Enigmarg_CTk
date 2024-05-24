@@ -82,7 +82,7 @@ class Manager():
         questions = database.get_all_questions()
         self.question_tree.delete(*self.question_tree.get_children())
         for question in questions:
-            self.question_tree.insert("", "end", values=(question[1], question[2], question[3], question[4], question[5]))
+            self.question_tree.insert("", "end", values=question)
 
     def clear_question(self, *clicked):
         if clicked:
@@ -171,6 +171,11 @@ class Manager():
         self.user_tree.place(relx=0.53, rely=0.07, relwidth=0.45, relheight=0.79)
 
         # Entrys
+        question_id_label = customtkinter.CTkLabel(tabView.tab("Questões"), text="Id")
+        question_id_label.place(relx=0.66, rely=0.03)
+        self.question_id_entry = customtkinter.CTkTextbox(tabView.tab("Questões"), width=105, height=40, fg_color="gray25")
+        self.question_id_entry.place(relx=0.66, rely=0.1)
+
         question_label = customtkinter.CTkLabel(tabView.tab("Questões"), text="Pergunta:")
         question_label.place(relx=0.02, rely=0.03)
         self.question_text = customtkinter.CTkTextbox(tabView.tab("Questões"), width=250, height=150, fg_color="gray25")
@@ -202,8 +207,8 @@ class Manager():
         delete_question_btn = customtkinter.CTkButton(tabView.tab("Questões"), text="Deletar", width=165, height=35, corner_radius=50, font=BOLD_FONT, fg_color="royal blue", hover=False, command=None,  cursor="hand2")
         delete_question_btn.place(relx=0.65, rely=0.47)
 
-        clear_question_btn = customtkinter.CTkButton(tabView.tab("Questões"), text="Limpar", width=120, height=40, corner_radius=50, font=BOLD_FONT, text_color="royal blue", fg_color="transparent", border_width=1, border_color="royal blue", hover=False, command=self.clear_question, cursor="hand2")
-        clear_question_btn.place(relx=0.8, rely=0.1)
+        clear_question_btn = customtkinter.CTkButton(tabView.tab("Questões"), text="Limpar", width=105, height=40, corner_radius=50, font=BOLD_FONT, text_color="royal blue", fg_color="transparent", border_width=1, border_color="royal blue", hover=False, command=self.clear_question, cursor="hand2")
+        clear_question_btn.place(relx=0.81, rely=0.1)
 
         # TreeView
         style = ttk.Style()
@@ -211,16 +216,17 @@ class Manager():
         style.configure("Treeview", font=("Arial", 13, "normal"), background="gray15", foreground="white", fieldbackground="gray15")
         style.map("Treeview", background=[("selected", "royal blue")])
         self.question_tree = ttk.Treeview(tabView.tab("Questões"))
-        self.question_tree["column"] = ("Pergunta", "Alternativa1", "Alternativa2", "Alternativa3", "Resposta")
+        self.question_tree["column"] = ("Id", "Pergunta", "Alternativa1", "Alternativa2", "Alternativa3", "Resposta")
 
         self.question_tree.column("#0", width=0, stretch=tk.NO)
+        self.question_tree.column("Id", anchor=tk.CENTER, width=10)
         self.question_tree.column("Pergunta", anchor=tk.CENTER, width=120)
         self.question_tree.column("Alternativa1", anchor=tk.CENTER, width=120)
         self.question_tree.column("Alternativa2", anchor=tk.CENTER, width=120)
         self.question_tree.column("Alternativa3", anchor=tk.CENTER, width=120)
         self.question_tree.column("Resposta", anchor=tk.CENTER, width=120)
 
-        self.question_tree.heading("#0", text="Id")
+        self.question_tree.heading("Id", text="Id")
         self.question_tree.heading("Pergunta", text="Pergunta")
         self.question_tree.heading("Alternativa1", text="Alternativa")
         self.question_tree.heading("Alternativa2", text="Alternativa")
