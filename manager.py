@@ -150,7 +150,7 @@ class Manager():
         delete_user_btn = customtkinter.CTkButton(tabView.tab("Usuários"), text="Deletar", width=90, height=40, corner_radius=50, font=BOLD_FONT, fg_color="royal blue", hover=False, command=self.delete_user,  cursor="hand2")
         delete_user_btn.place(x=290, y=370, anchor="center")
 
-        clear_user_btn = customtkinter.CTkButton(tabView.tab("Usuários"), text="Limpar", width=300, height=40, corner_radius=50, font=BOLD_FONT, text_color="royal blue", fg_color="transparent", border_width=1, border_color="royal blue", hover=False, command=self.clear_user, cursor="hand2")
+        clear_user_btn = customtkinter.CTkButton(tabView.tab("Usuários"), text="Limpar tudo", width=300, height=40, corner_radius=50, font=BOLD_FONT, text_color="royal blue", fg_color="transparent", border_width=1, border_color="royal blue", hover=False, command=self.clear_user, cursor="hand2")
         clear_user_btn.place(relx=0.05, rely=0.89)
 
         # TreeView
@@ -207,7 +207,7 @@ class Manager():
         delete_question_btn = customtkinter.CTkButton(tabView.tab("Questões"), text="Deletar", width=165, height=35, corner_radius=50, font=BOLD_FONT, fg_color="royal blue", hover=False, command=None,  cursor="hand2")
         delete_question_btn.place(relx=0.65, rely=0.47)
 
-        clear_question_btn = customtkinter.CTkButton(tabView.tab("Questões"), text="Limpar", width=105, height=40, corner_radius=50, font=BOLD_FONT, text_color="royal blue", fg_color="transparent", border_width=1, border_color="royal blue", hover=False, command=self.clear_question, cursor="hand2")
+        clear_question_btn = customtkinter.CTkButton(tabView.tab("Questões"), text="Limpar tudo", width=105, height=40, corner_radius=50, font=BOLD_FONT, text_color="royal blue", fg_color="transparent", border_width=1, border_color="royal blue", hover=False, command=self.clear_question, cursor="hand2")
         clear_question_btn.place(relx=0.81, rely=0.1)
 
         # TreeView
