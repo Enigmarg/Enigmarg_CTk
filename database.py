@@ -92,6 +92,11 @@ class Database():
         self.cnx.commit()
         print("Questão adicionada!")
 
+    def delete_question(self, question_id):
+        sql = ("DELETE FROM tb_question WHERE question_id = '%s'" % question_id)
+        self.cursor.execute(sql)
+        self.cnx.commit()
+
     def get_all_questions(self):
         sql = ("""
             SELECT q.question_id, q.question_text AS pergunta,

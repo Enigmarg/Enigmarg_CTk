@@ -119,6 +119,12 @@ class Manager():
             self.add_questions_to_treeview()
             self.clear_question()
 
+    def delete_question(self):
+        question_id = self.question_id_entry.get()
+        database.delete_question(question_id)
+        self.add_questions_to_treeview()
+        self.clear_question()
+
     def create_manager_screen(self):
 
         # TabView
@@ -206,7 +212,7 @@ class Manager():
         update_question_btn = customtkinter.CTkButton(tabView.tab("Questões"), text="Atualizar", width=165, height=35, corner_radius=50, font=BOLD_FONT, fg_color="royal blue", hover=False, command=None,  cursor="hand2")
         update_question_btn.place(relx=0.4, rely=0.47)
 
-        delete_question_btn = customtkinter.CTkButton(tabView.tab("Questões"), text="Deletar", width=165, height=35, corner_radius=50, font=BOLD_FONT, fg_color="royal blue", hover=False, command=None,  cursor="hand2")
+        delete_question_btn = customtkinter.CTkButton(tabView.tab("Questões"), text="Deletar", width=165, height=35, corner_radius=50, font=BOLD_FONT, fg_color="royal blue", hover=False, command=self.delete_question,  cursor="hand2")
         delete_question_btn.place(relx=0.65, rely=0.47)
 
         clear_question_btn = customtkinter.CTkButton(tabView.tab("Questões"), text="Limpar tudo", width=105, height=40, corner_radius=50, font=BOLD_FONT, text_color="royal blue", fg_color="transparent", border_width=1, border_color="royal blue", hover=False, command=self.clear_question, cursor="hand2")
