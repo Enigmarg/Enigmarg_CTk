@@ -107,11 +107,11 @@ class Manager():
             self.answer_entry.insert("1.0", row[5])
 
     def add_question(self):
-        question = self.get_altenatives()[0]
-        alter1 = self.get_altenatives()[1]
-        alter2 = self.get_altenatives()[2]
-        alter3 = self.get_altenatives()[3]
-        answer = self.get_altenatives()[4]
+        question = self.get_question()[0]
+        alter1 = self.get_question()[1]
+        alter2 = self.get_question()[2]
+        alter3 = self.get_question()[3]
+        answer = self.get_question()[4]
         if not (question and alter1 and alter2 and alter3 and answer):
             messagebox.showerror("Erro", "Preencha todos os campos!")
         else:
@@ -259,7 +259,7 @@ class Manager():
         role = self.role_option.get()   
         return role
     
-    def get_altenatives(self):
+    def get_question(self):
         question = self.question_text.get("1.0", "end-1c").strip()
         alter1 = self.alter1_entry.get("1.0", "end-1c").strip()
         alter2 = self.alter2_entry.get("1.0", "end-1c").strip()
