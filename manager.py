@@ -119,6 +119,17 @@ class Manager():
             self.add_questions_to_treeview()
             self.clear_question()
 
+    def update_question(self):
+        question_id = self.question_id_field_label.getvar("question_id")
+        question = self.get_question()[0]
+        alter1 = self.get_question()[1]
+        alter2 = self.get_question()[2]
+        alter3 = self.get_question()[3]
+        answer = self.get_question()[4]
+        database.update_question(question_id, question, alter1, alter2, alter3, answer)
+        self.add_questions_to_treeview()
+        self.clear_question()
+
     def delete_question(self):
         question_id = self.question_id_field_label.getvar("question_id")
         database.delete_question(question_id)
@@ -209,7 +220,7 @@ class Manager():
         add_question_btn = customtkinter.CTkButton(tabView.tab("Questões"), text="Adicionar", width=165, height=35, corner_radius=50, font=BOLD_FONT, fg_color="royal blue", hover=False, command=self.add_question, cursor="hand2")
         add_question_btn.place(relx=0.15, rely=0.47)
 
-        update_question_btn = customtkinter.CTkButton(tabView.tab("Questões"), text="Atualizar", width=165, height=35, corner_radius=50, font=BOLD_FONT, fg_color="royal blue", hover=False, command=None,  cursor="hand2")
+        update_question_btn = customtkinter.CTkButton(tabView.tab("Questões"), text="Atualizar", width=165, height=35, corner_radius=50, font=BOLD_FONT, fg_color="royal blue", hover=False, command=self.update_question,  cursor="hand2")
         update_question_btn.place(relx=0.4, rely=0.47)
 
         delete_question_btn = customtkinter.CTkButton(tabView.tab("Questões"), text="Deletar", width=165, height=35, corner_radius=50, font=BOLD_FONT, fg_color="royal blue", hover=False, command=self.delete_question,  cursor="hand2")

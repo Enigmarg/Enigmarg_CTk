@@ -92,8 +92,36 @@ class Database():
         self.cnx.commit()
         print("Questão adicionada!")
 
+    def update_question(self, question_id, question, alter1, alter2, alter3, answer):
+        self.cursor.execute("START TRANSACTION")
+
+        sql1 = ("UPDATE tb_question SET question_text = '%s' WHERE question_id = %s" % (question, question_id))
+        self.cursor.execute(sql1)
+
+        # Atualiza cada alternativa individualmente
+        sql2 = ("""
+            UPDATE tb_answer
+            JOIN (
+                SELECT 
+                    question_id, answer_id, answer_text,
+                    ROW_NUMBER() OVER (PARTITION BY question_id ORDER BY is_true ASC) AS rn
+                FROM tb_answer
+                WHERE question_id = %s
+            ) AS subquery
+            ON tb_answer.answer_id = subquery.answer_id
+            SET tb_answer.answer_text = 
+                CASE 
+                    WHEN subquery.rn = 1 THEN '%s'
+                    WHEN subquery.rn = 2 THEN '%s'
+                    WHEN subquery.rn = 3 THEN '%s'
+                    WHEN subquery.rn = 4 THEN '%s'
+                END
+        """ % (question_id, alter1, alter2, alter3, answer))
+        self.cursor.execute(sql2)
+        self.cnx.commit()
+
     def delete_question(self, question_id):
-        sql = ("DELETE FROM tb_question WHERE question_id = '%s'" % question_id)
+        sql = ("DELETE FROM tb_question WHERE question_id = '%s'" % (question_id))
         self.cursor.execute(sql)
         self.cnx.commit()
 
