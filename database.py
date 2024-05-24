@@ -81,8 +81,8 @@ class Database():
             GROUP BY tb_question.question_id
         """)
         self.cursor.execute(sql)
-        self.cnx.commit()
         questions = self.cursor.fetchall()
+        self.cnx.commit()
         return questions
     
     def add_question(self, question, alter1, alter2, alter3, answer):
