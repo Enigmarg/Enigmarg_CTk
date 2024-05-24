@@ -87,7 +87,7 @@ class Manager():
     def clear_question(self, *clicked):
         if clicked:
             self.question_tree.selection_remove(self.question_tree.focus())
-        self.question_id_entry.delete("0", "end")
+        self.question_id_field_label.setvar("question_id", "")
         self.question_text.delete("1.0", "end")
         self.alter1_entry.delete("1.0", "end")
         self.alter2_entry.delete("1.0", "end")
@@ -99,7 +99,7 @@ class Manager():
         if selected_items:
             row = self.question_tree.item(selected_items)["values"]
             self.clear_question()
-            self.question_id_entry.insert("0", row[0])
+            self.question_id_field_label.setvar("question_id", row[0])
             self.question_text.insert("1.0", row[1])
             self.alter1_entry.insert("1.0", row[2])
             self.alter2_entry.insert("1.0", row[3])
@@ -120,7 +120,7 @@ class Manager():
             self.clear_question()
 
     def delete_question(self):
-        question_id = self.question_id_entry.get()
+        question_id = self.question_id_field_label.getvar("question_id")
         database.delete_question(question_id)
         self.add_questions_to_treeview()
         self.clear_question()
@@ -181,8 +181,8 @@ class Manager():
         # Entrys
         question_id_label = customtkinter.CTkLabel(tabView.tab("Questões"), text="Id:")
         question_id_label.place(relx=0.66, rely=0.03)
-        self.question_id_entry = customtkinter.CTkEntry(tabView.tab("Questões"), width=105, height=45, fg_color="gray25", border_width=0)
-        self.question_id_entry.place(relx=0.66, rely=0.1)
+        self.question_id_field_label = customtkinter.CTkLabel(tabView.tab("Questões"), text="", textvariable="question_id", width=90, height=45, fg_color="gray25")
+        self.question_id_field_label.place(relx=0.66, rely=0.1)
 
         question_label = customtkinter.CTkLabel(tabView.tab("Questões"), text="Pergunta:")
         question_label.place(relx=0.02, rely=0.03)
