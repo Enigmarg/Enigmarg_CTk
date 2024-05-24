@@ -99,12 +99,12 @@ class Database():
 
     def get_all_questions(self):
         sql = ("""
-            SELECT q.question_id, q.question_text AS pergunta,
-                (SELECT answer_text FROM tb_answer WHERE question_id = q.question_id AND is_true = FALSE ORDER BY answer_id LIMIT 0, 1) AS alternativa,
-                (SELECT answer_text FROM tb_answer WHERE question_id = q.question_id AND is_true = FALSE ORDER BY answer_id LIMIT 1, 1) AS alternativa,
-                (SELECT answer_text FROM tb_answer WHERE question_id = q.question_id AND is_true = FALSE ORDER BY answer_id LIMIT 2, 1) AS alternativa,
-                (SELECT answer_text FROM tb_answer WHERE question_id = q.question_id AND is_true = TRUE LIMIT 4) AS resposta
-            FROM tb_question q
+            SELECT tb_question.question_id, tb_question.question_text AS pergunta,
+                (SELECT answer_text FROM tb_answer WHERE question_id = tb_question.question_id ORDER BY is_true ASC LIMIT 1 OFFSET 0) AS alternativa,
+                (SELECT answer_text FROM tb_answer WHERE question_id = tb_question.question_id ORDER BY is_true ASC LIMIT 1 OFFSET 1) AS alternativa,
+                (SELECT answer_text FROM tb_answer WHERE question_id = tb_question.question_id ORDER BY is_true ASC LIMIT 1 OFFSET 2) AS alternativa,
+                (SELECT answer_text FROM tb_answer WHERE question_id = tb_question.question_id ORDER BY is_true ASC LIMIT 1 OFFSET 3) AS resposta
+            FROM tb_question
         """)
         self.cursor.execute(sql)
         questions = self.cursor.fetchall()
