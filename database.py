@@ -28,7 +28,7 @@ class Database():
             print(f"Falha na conexão! {err}")
             return None
         
-    def get_user_password(self, email):
+    def get_user_password(self, email:str):
         try:
             sql = ("SELECT user_password FROM tb_user WHERE user_email='%s'" % email)
             self.cursor.execute(sql)
@@ -45,12 +45,12 @@ class Database():
         self.cnx.commit()
         return users
         
-    def add_user(self, email, password, role):
+    def add_user(self, email:str, password:str, role:int):
         sql = ("INSERT INTO tb_user (user_email, user_password, role_id) SELECT '%s', '%s', role_id FROM tb_role WHERE tb_role.role_name = '%s'" % (email, password, role))
         self.cursor.execute(sql)
         self.cnx.commit()
 
-    def update_user(self, email, password, role):
+    def update_user(self, email:str, password:str, role:int):
         if (email and password and role):
             sql = ("UPDATE tb_user JOIN tb_role ON tb_role.role_name = '%s' SET tb_user.user_email = '%s', tb_user.user_password = '%s', tb_user.role_id = tb_role.role_id WHERE tb_user.user_email = '%s'" % (role, email, password, email))
             self.cursor.execute(sql)
@@ -60,7 +60,7 @@ class Database():
             self.cursor.execute(sql)
             self.cnx.commit()  
 
-    def delete_user(self, email):
+    def delete_user(self, email:str):
         sql = ("DELETE FROM tb_user WHERE user_email = '%s'" % email)
         self.cursor.execute(sql)
         self.cnx.commit()
@@ -80,14 +80,14 @@ class Database():
         self.cnx.commit()
         return questions
     
-    def add_question(self, question, alter1, alter2, alter3, answer):
+    def add_question(self, question:str, alter1:str, alter2:str, alter3:str, answer:str):
         self.cursor.execute("INSERT INTO tb_question (question_text) SELECT '%s'" % (question))
         question_id = self.cursor.lastrowid
         self.cursor.executemany("INSERT INTO tb_answer (answer_text, is_true, question_id) VALUES (%s, %s, %s)", [(alter1, 0, question_id), (alter2, 0, question_id), (alter3, 0, question_id), (answer, 1, question_id)])
         self.cnx.commit()
         print("Questão adicionada!")
 
-    def update_question(self, question_id, question, alter1, alter2, alter3, answer):
+    def update_question(self, question_id:str, question:str, alter1:str, alter2:str, alter3:str, answer):
         self.cursor.execute("START TRANSACTION")
 
         sql1 = ("UPDATE tb_question SET question_text = '%s' WHERE question_id = %s" % (question, question_id))
@@ -115,7 +115,7 @@ class Database():
         self.cursor.execute(sql2)
         self.cnx.commit()
 
-    def delete_question(self, question_id):
+    def delete_question(self, question_id:int):
         sql = ("DELETE FROM tb_question WHERE question_id = '%s'" % (question_id))
         self.cursor.execute(sql)
         self.cnx.commit()
