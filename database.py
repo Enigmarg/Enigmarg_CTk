@@ -138,3 +138,17 @@ class Database():
         questions = self.cursor.fetchall()
         self.cnx.commit()
         return questions
+
+    def add_score(self, user_id:int, score:int):
+        sql = ("SELECT * FROM tb_ranking WHERE user_id = %s" % (user_id))
+        self.cursor.execute(sql)
+        self.cnx.commit()
+        user = self.cursor.fetchone()
+        if user:
+            sql = ("UPDATE tb_ranking SET score = %s WHERE user_id = %s" % (score, user_id))
+            self.cursor.execute(sql)
+            self.cnx.commit()
+        else:
+            sql = ("INSERT INTO tb_ranking (user_id, score) VALUES (%s, %s)" % (user_id, score))
+            self.cursor.execute(sql)
+            self.cnx.commit()
