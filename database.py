@@ -1,7 +1,6 @@
 from dotenv import load_dotenv
 import os
 import mysql.connector
-from mysql.connector.constants import ClientFlag
 
 load_dotenv()
 
@@ -21,10 +20,6 @@ class Database():
                 host = self.host,
                 database = self.database,
                 # port = self.port,
-                # client_flags = [ClientFlag.SSL],
-                # "ssl_ca": "/opt/mysql/ssl/ca.pem",
-                # "ssl_cert": "/opt/mysql/ssl/client-cert.pem",
-                # "ssl_key": "/opt/mysql/ssl/client-key.pem",
             )
             print("Conexão bem sucedida!")
             self.cursor = self.cnx.cursor(buffered=True)
