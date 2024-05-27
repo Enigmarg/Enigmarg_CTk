@@ -197,24 +197,24 @@ class Manager():
 
         question_label = customtkinter.CTkLabel(tabView.tab("Questões"), text="Pergunta:")
         question_label.place(relx=0.02, rely=0.03)
-        self.question_text = customtkinter.CTkTextbox(tabView.tab("Questões"), width=250, height=150, fg_color="gray25")
+        self.question_text = customtkinter.CTkTextbox(tabView.tab("Questões"), width=250, height=150, fg_color="gray25", wrap="word")
         self.question_text.place(relx=0.02, rely=0.1)
 
         answer_label = customtkinter.CTkLabel(tabView.tab("Questões"), text="Alternativas:")
         answer_label.place(relx=0.35, rely=0.03)
 
-        self.alter1_entry = customtkinter.CTkTextbox(tabView.tab("Questões"), width=230, height=45, fg_color="gray25", border_width=0)
+        self.alter1_entry = customtkinter.CTkTextbox(tabView.tab("Questões"), width=230, height=45, fg_color="gray25", border_width=0, wrap="word")
         self.alter1_entry.place(relx=0.35, rely=0.1)
 
-        self.alter2_entry = customtkinter.CTkTextbox(tabView.tab("Questões"), width=230, height=45, fg_color="gray25", border_width=0)
+        self.alter2_entry = customtkinter.CTkTextbox(tabView.tab("Questões"), width=230, height=45, fg_color="gray25", border_width=0, wrap="word")
         self.alter2_entry.place(relx=0.35, rely=0.217)
 
-        self.alter3_entry = customtkinter.CTkTextbox(tabView.tab("Questões"), width=230, height=45, fg_color="gray25", border_width=0)
+        self.alter3_entry = customtkinter.CTkTextbox(tabView.tab("Questões"), width=230, height=45, fg_color="gray25", border_width=0, wrap="word")
         self.alter3_entry.place(relx=0.35, rely=0.335)
 
         answer_label = customtkinter.CTkLabel(tabView.tab("Questões"), text="Resposta:")
         answer_label.place(relx=0.66, rely=0.265)
-        self.answer_entry = customtkinter.CTkTextbox(tabView.tab("Questões"), width=230, height=45, fg_color="gray25", border_width=0)
+        self.answer_entry = customtkinter.CTkTextbox(tabView.tab("Questões"), width=230, height=45, fg_color="gray25", border_width=0, wrap="word")
         self.answer_entry.place(relx=0.66, rely=0.335)
 
         add_question_btn = customtkinter.CTkButton(tabView.tab("Questões"), text="Adicionar", width=165, height=35, corner_radius=50, font=BOLD_FONT, fg_color="royal blue", hover=False, command=self.add_question, cursor="hand2")
