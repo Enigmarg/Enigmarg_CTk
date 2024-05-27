@@ -45,12 +45,12 @@ class Database():
         self.cnx.commit()
         return users
         
-    def add_user(self, email:str, password:str, role:int):
+    def add_user(self, email:str, password:str, role:str):
         sql = ("INSERT INTO tb_user (user_email, user_password, role_id) SELECT '%s', '%s', role_id FROM tb_role WHERE tb_role.role_name = '%s'" % (email, password, role))
         self.cursor.execute(sql)
         self.cnx.commit()
 
-    def update_user(self, email:str, password:str, role:int):
+    def update_user(self, email:str, password:str, role:str):
         if (email and password and role):
             sql = ("UPDATE tb_user JOIN tb_role ON tb_role.role_name = '%s' SET tb_user.user_email = '%s', tb_user.user_password = '%s', tb_user.role_id = tb_role.role_id WHERE tb_user.user_email = '%s'" % (role, email, password, email))
             self.cursor.execute(sql)
