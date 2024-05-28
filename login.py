@@ -68,7 +68,7 @@ class Login():
         self.clear_screen()
         self.screen.title("Login")
 
-        enigmarg_logo = customtkinter.CTkImage(light_image=Image.open("resources/logo.png"), dark_image=Image.open("resources/logo.png"), size=(185, 145))
+        enigmarg_logo = customtkinter.CTkImage(light_image=self.enigmarg_logo, dark_image=self.enigmarg_logo, size=(185, 145))
         logo_label = customtkinter.CTkLabel(self.screen,text="", image=enigmarg_logo)
         logo_label.pack(pady=45)
 
