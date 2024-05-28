@@ -40,6 +40,18 @@ class Database():
         except Exception as e:
             print(e)
             
+    # Pega e retorna o cargo do usuário do banco de dados.
+    def get_user_role(self, email:str):
+        try:
+            sql = ("SELECT tb_role.role_name FROM tb_role JOIN tb_user ON tb_role.role_id = tb_user.role_id WHERE tb_user.user_email='%s'" % email)
+            self.cursor.execute(sql)
+            self.cnx.commit()
+            role = self.cursor.fetchone()[0]
+            print(role)
+            return role
+        except Exception as e:
+            print(e)
+        
     # Pega e retorna todos os usuários do banco de dados.
     def get_all_users(self):
         sql = ("SELECT tb_user.user_email, role_name FROM tb_role INNER JOIN tb_user ON tb_user.role_id = tb_role.role_id WHERE role_name != 'Admin'")
