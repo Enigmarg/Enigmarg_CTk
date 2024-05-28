@@ -187,7 +187,7 @@ class Manager():
         self.user_tree.heading("Email", text="Email")
         self.user_tree.heading("Cargo", text="Cargo")
 
-        self.user_tree.place(relx=0.53, rely=0.07, relwidth=0.45, relheight=0.79)
+        self.user_tree.place(relx=0.47, rely=0.075, relwidth=0.5, relheight=0.9)
 
         # Entrys
         question_id_label = customtkinter.CTkLabel(tabView.tab("Questões"), text="Id:")
