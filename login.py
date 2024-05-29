@@ -92,12 +92,12 @@ class Login():
         return sha256(password.encode("utf-8")).hexdigest()
     
     def check_user(self):
-        if self.get_password() == database.get_user_password(self.get_email()):
+        if database.get_user(self.get_email(), self.get_password()):
             print("Login feito com sucesso!")
             self.screen.destroy()
         else:
-            print("Email ou senha incorretos!")
-            messagebox.showerror("Erro", "Email ou senha incorretos")
+            print("Email ou senha inválidos.")
+            messagebox.showerror("Erro", "Email ou senha inválidos.")
 
 if __name__ == "__main__":
     database = Database()

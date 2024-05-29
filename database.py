@@ -29,14 +29,14 @@ class Database():
             print(f"Falha na conexão! {err}")
             return None
         
-    # Pega e retorna a senha do usuário do banco de dados.
-    def get_user_password(self, email:str):
+    # Pega e retorna o usuário do banco de dados.
+    def get_user(self, email:str, password:str):
         try:
-            sql = ("SELECT user_password FROM tb_user WHERE user_email='%s'" % email)
+            sql = ("SELECT user_email, user_password FROM tb_user WHERE user_email='%s' AND user_password='%s'" % (email, password))
             self.cursor.execute(sql)
             self.cnx.commit()
-            password = self.cursor.fetchone()[0]
-            return password
+            user = self.cursor.fetchone()[0]
+            return user
         except Exception as e:
             print(e)
             
