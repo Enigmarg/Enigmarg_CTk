@@ -60,7 +60,7 @@ class Login():
     def send_email(self): 
         if database.get_user_email(self.get_email()):
             sender_email = os.getenv("SENDER_EMAIL")
-            rec_email = "vitoreiken@gmail.com"
+            rec_email = "example@email.com"
             password = os.getenv("PASSWORD_EMAIL")
             message = f"{self.get_email()} esqueceu a senha!"
 
