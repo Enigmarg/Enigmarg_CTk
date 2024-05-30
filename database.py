@@ -172,3 +172,24 @@ class Database():
             sql = ("INSERT INTO tb_ranking (user_id, score) VALUES (%s, %s)" % (user_id, score))
             self.cursor.execute(sql)
             self.cnx.commit()
+
+    def get_ranking(self):
+        sql = ("SELECT tb_user.user_email, tb_ranking.score FROM tb_ranking JOIN tb_user ON tb_ranking.user_id = tb_user.user_id ORDER BY score DESC LIMIT 10")
+        self.cursor.execute(sql)
+        ranking = self.cursor.fetchall()
+        self.cnx.commit()
+        return ranking
+    
+    def get_email_ranking(self):
+        sql = ("SELECT tb_user.user_email FROM tb_user JOIN tb_ranking ON tb_user.user_id = tb_ranking.user_id ORDER BY score DESC LIMIT 10")
+        self.cursor.execute(sql)
+        emails = self.cursor.fetchall()
+        self.cnx.commit()
+        return emails
+    
+    def get_score_ranking(self):
+        sql = ("SELECT tb_ranking.score FROM tb_ranking JOIN tb_user ON tb_ranking.user_id = tb_user.user_id ORDER BY score DESC LIMIT 10;")
+        self.cursor.execute(sql)
+        emails = self.cursor.fetchall()
+        self.cnx.commit()
+        return emails
