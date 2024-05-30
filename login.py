@@ -4,6 +4,8 @@ from tkinter import messagebox
 from database import Database
 from hashlib import sha256
 from PIL import Image
+import smtplib
+import os
 
 class Login():
 
@@ -38,6 +40,38 @@ class Login():
         else:
             self.password_input.configure(show="")
             self.toggle_btn.configure(image=self.view_icon)
+    
+    def get_email(self):
+        email = self.email_input.get()
+        return email
+
+    def get_password(self):
+        password = self.password_input.get()
+        return sha256(password.encode("utf-8")).hexdigest()
+    
+    def check_user(self):
+        if database.get_user(self.get_email(), self.get_password()):
+            print("Login feito com sucesso!")
+            self.screen.destroy()
+        else:
+            print("Email ou senha inválidos.")
+            messagebox.showerror("Erro", "Email ou senha inválidos.")
+        
+    def send_email(self): 
+        if database.get_user_email(self.get_email()):
+            sender_email = os.getenv("SENDER_EMAIL")
+            rec_email = "vitoreiken@gmail.com"
+            password = os.getenv("PASSWORD_EMAIL")
+            message = f"{self.get_email()} esqueceu a senha!"
+
+            server = smtplib.SMTP("smtp.gmail.com", 587)
+            server.starttls()
+            server.login(sender_email, password)
+            print("Login feito com sucesso!")
+            server.sendmail(sender_email, rec_email, message)
+            print("Email enviado com sucesso!")
+        else:
+            messagebox.showerror("Erro", "Email inválido.")
 
     def create_login_screen(self):
         self.clear_screen()
@@ -75,7 +109,7 @@ class Login():
         self.email_input = customtkinter.CTkEntry(self.screen, width=200, height=30, placeholder_text="E-mail", border_width=0)
         self.email_input.place(relx=0.5, rely=0.5, anchor="center")
 
-        send_btn = customtkinter.CTkButton(self.screen, width=200, height=30, text="Enviar", fg_color="royal blue", hover=False, command=None, cursor="hand2")
+        send_btn = customtkinter.CTkButton(self.screen, width=200, height=30, text="Enviar", fg_color="royal blue", hover=False, command=self.send_email, cursor="hand2")
         send_btn.place(relx=0.5, rely=0.6, anchor="center")
 
         return_btn = customtkinter.CTkButton(self.screen, width=0, height=0, text="Voltar", command=self.create_login_screen, text_color="white", fg_color="transparent", hover=False, cursor="hand2")
@@ -83,23 +117,9 @@ class Login():
 
         self.screen.mainloop()
 
-    def get_email(self):
-        email = self.email_input.get()
-        return email
-
-    def get_password(self):
-        password = self.password_input.get()
-        return sha256(password.encode("utf-8")).hexdigest()
-    
-    def check_user(self):
-        if database.get_user(self.get_email(), self.get_password()):
-            print("Login feito com sucesso!")
-            self.screen.destroy()
-        else:
-            print("Email ou senha inválidos.")
-            messagebox.showerror("Erro", "Email ou senha inválidos.")
 
 if __name__ == "__main__":
     database = Database()
     database.connect()
     Login().create_login_screen()
+    # Login().send_email()

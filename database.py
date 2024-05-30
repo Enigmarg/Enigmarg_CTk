@@ -40,6 +40,18 @@ class Database():
         except Exception as e:
             print(e)
             
+    # Pega e retorna o email do usuário do banco de dados.
+    def get_user_email(self, email:str):
+        try:
+            sql = ("SELECT tb_user.user_email FROM tb_user WHERE tb_user.user_email='%s'" % email)
+            self.cursor.execute(sql)
+            self.cnx.commit()
+            email = self.cursor.fetchone()[0]
+            print(email)
+            return email
+        except Exception as e:
+            print(e)
+
     # Pega e retorna o cargo do usuário do banco de dados.
     def get_user_role(self, email:str):
         try:
