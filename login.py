@@ -73,19 +73,18 @@ class Login():
             msg["Subject"] = "Recuperação de senha Enigmarg"
             message = f"""
                 <h1>Recuperação de senha Enigmarg</h1>
-                <p>Prezado(a) Professor(a),</p>
-                <p>Um dos usuários do Enigmarg solicitou a redefinição de senha de acesso, e estamos aqui para tentar facilitar o processo.</p>
-                <p>Aqui estão os detalhes do usuário e as instruções para ajudá-lo a recuperar sua senha:</p>
+                <p>Prezado(a) professor(a)/responsável,</p>
+                <p>Neste e-mail estão as instruções para a realização da troca de senha no jogo (Enigmarg) solicitada por um usuário.</p>
                 <p><strong>E-mail do usuário:</strong> {self.get_email()}</p>
-                <p>Para redefinição de senha do usuário, siga os seguintes passos:</p>
+                <p>Abaixo, estão as instruções para como o(a) professor(a)/responsável poderá fazer a troca da senha do usuário:</p>
                 <ol>
                     <li>Faça o login no Enigmarg com as credenciais de professor, para que possa visualizar o gerenciador de usuários.</li>
                     <li>Procure pelo e-mail do usuário que necessita recuperar a senha e selecione-o, ou simplesmente digite o e-mail do usuário no campo de e-mail.</li>
                     <li>Insira uma nova senha para esse usuário no campo de senha.</li>
-                    <li>Garanta que todas as informações estejam corretas (email do usuário, senha e o cargo).</li>
+                    <li>Garanta que todas as informações estejam corretas (email do usuário, senha e cargo).</li>
                     <li>Aperte no botão de atualizar, e veja se não ocorreu nenhum erro.</li>
                 </ol>
-                <p>Após todo processo, você já poderá comunicar o usuário da melhor forma, informando suas novas credenciais.</p>
+                <p>Feitas essas etapas, o usuário já poderá acessar o jogo utilizando a nova senha, que deverá ser informada pelo(a) professor(a)/responsável.</p>
                 <p>Agradecemos pela colaboração.</p>
                 <p>Atenciosamente,<br>Equipe Enigmarg</p>
             """
