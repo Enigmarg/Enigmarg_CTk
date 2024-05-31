@@ -1,8 +1,7 @@
 import customtkinter
 import tkinter as tk
-from tkinter import ttk
-from tkinter import messagebox
 from database import Database
+from PIL import Image
 
 database = Database()
 database.connect()
@@ -14,7 +13,6 @@ class Ranking():
         self.width = 800
         self.height = 600
         self.screen = customtkinter.CTk()
-        self.screen.configure(fg_color="royal blue")
         self.screen.title("Ranking")
         customtkinter.set_appearance_mode("dark")
         self.screen.resizable(False, False)
@@ -27,23 +25,26 @@ class Ranking():
 
         self.screen.geometry("%dx%d+%d+%d" % (self.width, self.height, x, y))
 
+
         self.email_labels = []
         self.score_labels = []
     
     def add_email_in_label(self):
          for i, email in enumerate(database.get_email_ranking()):
-                label = tk.Label(self.screen, text=email, font=BOLD_FONT, width=20, height=2, border=2, bg="white")
-                label.place(x=350, y=60*i+10)
+                label = tk.Label(self.screen, text=email, font=BOLD_FONT, width=0, height=0, bg="#b4b4b4")
+                label.place(x=250, y=60*i+155)
                 self.email_labels.append(label)
     
     def add_score_in_label(self):
          for i, score in enumerate(database.get_score_ranking()):
-                label = tk.Label(self.screen, text=score, font=BOLD_FONT, width=20, height=2, border=2, bg="white")
-                label.place(x=550, y=60*i+10)
+                label = tk.Label(self.screen, text=score, font=BOLD_FONT, width=0, height=0, bg="#b4b4b4")
+                label.place(x=625, y=60*i+155)
                 self.score_labels.append(label)
 
-
     def create_ranking_screen(self):
+        ranking_bg = customtkinter.CTkImage(Image.open("resources/ranking_bg.png"), size=(800, 600))
+        main_label = customtkinter.CTkLabel(self.screen, text="", image=ranking_bg)
+        main_label.place(x=0, y=0)
         self.add_email_in_label()
         self.add_score_in_label()
 
