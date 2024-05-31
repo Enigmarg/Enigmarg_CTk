@@ -67,35 +67,39 @@ class Login():
         
     def send_forgot_password_email(self): 
         if database.get_user_email(self.get_email()):
-            msg = MIMEMultipart()
-            msg["From"] = self.sender_email
-            msg["To"] = self.receiver_email
-            msg["Subject"] = "Recuperação de senha Enigmarg"
-            message = f"""
-                <h1>Recuperação de senha Enigmarg</h1>
-                <p>Prezado(a) professor(a)/responsável,</p>
-                <p>Neste e-mail estão as instruções para a realização da troca de senha no jogo (Enigmarg) solicitada por um usuário.</p>
-                <p><strong>E-mail do usuário:</strong> {self.get_email()}</p>
-                <p>Abaixo, estão as instruções para como o(a) professor(a)/responsável poderá fazer a troca da senha do usuário:</p>
-                <ol>
-                    <li>Faça o login no Enigmarg com as credenciais de professor, para que possa visualizar o gerenciador de usuários.</li>
-                    <li>Procure pelo e-mail do usuário que necessita recuperar a senha e selecione-o, ou simplesmente digite o e-mail do usuário no campo de e-mail.</li>
-                    <li>Insira uma nova senha para esse usuário no campo de senha.</li>
-                    <li>Garanta que todas as informações estejam corretas (email do usuário, senha e cargo).</li>
-                    <li>Aperte no botão de atualizar, e veja se não ocorreu nenhum erro.</li>
-                </ol>
-                <p>Feitas essas etapas, o usuário já poderá acessar o jogo utilizando a nova senha, que deverá ser informada pelo(a) professor(a)/responsável.</p>
-                <p>Agradecemos pela colaboração.</p>
-                <p>Atenciosamente,<br>Equipe Enigmarg</p>
-            """
-            msg.attach(MIMEText(message, "html"))
+            try:
+                msg = MIMEMultipart()
+                msg["From"] = self.sender_email
+                msg["To"] = self.receiver_email
+                msg["Subject"] = "Recuperação de senha Enigmarg"
+                message = f"""
+                    <h1>Recuperação de senha Enigmarg</h1>
+                    <p>Prezado(a) professor(a)/responsável,</p>
+                    <p>Neste e-mail estão as instruções para a realização da troca de senha no jogo (Enigmarg) solicitada por um usuário.</p>
+                    <p><strong>E-mail do usuário:</strong> {self.get_email()}</p>
+                    <p>Abaixo, estão as instruções para como o(a) professor(a)/responsável poderá fazer a troca da senha do usuário:</p>
+                    <ol>
+                        <li>Faça o login no Enigmarg com as credenciais de professor, para que possa visualizar o gerenciador de usuários.</li>
+                        <li>Procure pelo e-mail do usuário que necessita recuperar a senha e selecione-o, ou simplesmente digite o e-mail do usuário no campo de e-mail.</li>
+                        <li>Insira uma nova senha para esse usuário no campo de senha.</li>
+                        <li>Garanta que todas as informações estejam corretas (email do usuário, senha e cargo).</li>
+                        <li>Aperte no botão de atualizar, e veja se não ocorreu nenhum erro.</li>
+                    </ol>
+                    <p>Feitas essas etapas, o usuário já poderá acessar o jogo utilizando a nova senha, que deverá ser informada pelo(a) professor(a)/responsável.</p>
+                    <p>Agradecemos pela colaboração.</p>
+                    <p>Atenciosamente,<br>Equipe Enigmarg</p>
+                """
+                msg.attach(MIMEText(message, "html"))
 
-            server = smtplib.SMTP(self.smtp_server, self.smtp_port)
-            server.starttls()
-            server.login(self.sender_email, self.sender_password)
-            print("Login feito com sucesso!")
-            server.sendmail(self.sender_email, self.receiver_email, msg.as_string())
-            messagebox.showinfo("Sucesso", "Sua requisição já foi enviada para um responsável.\nEm breve ele poderá entrar em contato com mais informações.")
+                server = smtplib.SMTP(self.smtp_server, self.smtp_port)
+                server.starttls()
+                server.login(self.sender_email, self.sender_password)
+                print("Login feito com sucesso!")
+                server.sendmail(self.sender_email, self.receiver_email, msg.as_string())
+                messagebox.showinfo("Sucesso", "Sua requisição já foi enviada para um responsável.\nEm breve ele poderá entrar em contato com mais informações.")
+            except Exception as e:
+                print(e)
+                messagebox.showerror("Erro", "Por favor, tente novamente mais tarde.")
         else:
             messagebox.showerror("Erro", "Email inválido.")
 
