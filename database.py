@@ -47,7 +47,6 @@ class Database():
             self.cursor.execute(sql)
             self.cnx.commit()
             email = self.cursor.fetchone()[0]
-            print(email)
             return email
         except Exception as e:
             print(e)

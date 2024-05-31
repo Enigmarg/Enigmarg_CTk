@@ -95,7 +95,7 @@ class Login():
             server.login(self.sender_email, self.sender_password)
             print("Login feito com sucesso!")
             server.sendmail(self.sender_email, self.receiver_email, msg.as_string())
-            print("Email enviado com sucesso!")
+            messagebox.showinfo("Sucesso", "Sua requisição já foi enviada para um responsável.\nEm breve ele poderá entrar em contato com mais informações.")
         else:
             messagebox.showerror("Erro", "Email inválido.")
 
