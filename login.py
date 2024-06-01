@@ -59,8 +59,12 @@ class Login():
     
     def check_user(self):
         if database.get_user(self.get_email(), self.get_password()):
-            print("Login feito com sucesso!")
-            self.screen.destroy()
+            if database.get_user_role(self.get_email()) == "Professor":
+                print("Login feito como professor!")
+                self.screen.destroy()
+            elif database.get_user_role(self.get_email()) == "Aluno":
+                print("Login feito como aluno!")
+                self.screen.destroy()
         else:
             print("Email ou senha inválidos.")
             messagebox.showerror("Erro", "Email ou senha inválidos.")

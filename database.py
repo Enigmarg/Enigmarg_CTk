@@ -58,7 +58,6 @@ class Database():
             self.cursor.execute(sql)
             self.cnx.commit()
             role = self.cursor.fetchone()[0]
-            print(role)
             return role
         except Exception as e:
             print(e)
